@@ -1,0 +1,30 @@
+One input box:
+
+Enter a pronoun option for your character:
+
+After changing it:
+
+Enter another pronoun option
+
+Keep a list displayed by writing the list to a text box.
+
+Remove a pronoun option -> go through list and find anywhere that option is there
+
+----------
+
+Please enter each set of pronouns for your character:
+
+if I use the 3 version of pronoun option, it avoids making any assumptions and makes it clear how they will be used
+
+TODO: Account for pronoun display overflow once the actual sprites are there
+
+for possessive: check if last letter is 's', if it shouldnt be there in that case remove it.
+
+
+Create txt file or hardcoded list and check if the entered ones are included
+
+
+'Enter X's Pronouns:'
+
+
+For pause menu, have character creation easily accessible and pretty similar to default creation, but start game button changed to 'return to game' or something

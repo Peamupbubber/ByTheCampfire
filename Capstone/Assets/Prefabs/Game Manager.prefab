@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c440bb51f7775144a195d8968fa3134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  inputBox: {fileID: 0}
+  removeBox: {fileID: 0}
+  pronounDisplayText: {fileID: 0}
+  errorDisplayText: {fileID: 0}

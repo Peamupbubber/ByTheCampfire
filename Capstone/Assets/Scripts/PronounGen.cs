@@ -1,33 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PronounGen : MonoBehaviour
 {
-    [SerializeField] private GameObject canvas;
-    private TMP_InputField defaultBox;
-    private TMP_InputField lowestBox;
+    [SerializeField] private TMP_InputField inputBox;
+    [SerializeField] private TMP_InputField removeBox;
 
-    private float boxXPos;
-    private float boxZPos;
-
-    private float lowestBoxYPos;
-
-    List<string> playerPronouns = new List<string>();
+    [SerializeField] private TMP_Text pronounDisplayText;
+    [SerializeField] private TMP_Text errorDisplayText;
 
 
+    /* Consider migrating pronoun info to txt files where I can store player data for saves */
+    List<string> playerSubjectPronouns = new List<string>();
+    List<string> playerObjectPronouns = new List<string>();
+    List<string> playerPossessivePronouns = new List<string>();
+
+    private int numPronouns = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        lowestBox = FindObjectOfType<TMP_InputField>();
-        defaultBox = lowestBox; //using this instead of prefab for the object's script
 
-        boxXPos = defaultBox.gameObject.transform.position.x;
-        boxZPos = defaultBox.gameObject.transform.position.z;
-
-        lowestBoxYPos = defaultBox.gameObject.transform.position.y;
     }
 
     // Update is called once per frame
@@ -36,32 +34,97 @@ public class PronounGen : MonoBehaviour
         
     }
 
-    public void AddNewPronounBox(TMP_InputField alteredBox) {
-        playerPronouns.Add(lowestBox.text);
+    public void AddNewPronoun() {
+        string toAdd = inputBox.text;
+        toAdd = toAdd.ToLower();
+        toAdd = toAdd.Replace(" ", "");
 
-        float altBoxYPos = alteredBox.gameObject.transform.position.y;
+        string[] split = toAdd.Split("/");
+        bool err = false;
 
-        //Make a new box
-        if (altBoxYPos == lowestBoxYPos)
-        {
-            lowestBoxYPos -= 75;
-            lowestBox = Instantiate(defaultBox, new Vector3(boxXPos, lowestBoxYPos, boxZPos), Quaternion.identity, canvas.transform);
-            lowestBox.onValueChanged.RemoveAllListeners();
-            lowestBox.onValueChanged.AddListener(delegate { AddNewPronounBox(lowestBox); });
-            lowestBox.text = "";
+        if (split.Length != 3) {
+             err = true;
         }
 
-        //OR on select if the text is already in pP then its not the lowest box and we dont need to change it
+        for (int i = 0; i < split.Length; i++) {
+            if (split[i].Length == 0) { 
+                err = true;
+                break;
+            }
+        }
 
-        else { 
+        if (!err) {
+            if (alreadyContainsPronoun(split))
+            {
+                errorDisplayText.text = toAdd + " is already in your pronoun list";
+
+            }
+            else {             
+                playerSubjectPronouns.Add(split[0]);
+                playerObjectPronouns.Add(split[1]);
+                playerPossessivePronouns.Add(split[2]);
+
+                numPronouns++;
+                errorDisplayText.text = "";     
             
+                updateDisplayText();
+            }
+
+            inputBox.text = "";
+            inputBox.Select();
         }
-        
-        lowestBox.Select();
+        else
+            errorDisplayText.text = "Pronouns must adhear to the above format";
+
+    }
+
+    //Pre-condition: split.Length = 3
+    private bool alreadyContainsPronoun(string[] split) {
+        for (int i = 0; i < numPronouns; i++) {
+            if (playerSubjectPronouns[i] == split[0] && playerObjectPronouns[i] == split[1] && playerPossessivePronouns[i] == split[2])
+                return true;
+        }
+
+        return false;
+    }
+
+    public void RemovePronoun() {
+        string toRemove = removeBox.text;
+        bool itemWasRemoved = false;
 
 
-        foreach (string s in playerPronouns) {
-            Debug.Log(s);
+        for (int i = 0; i < numPronouns; i++)
+        {
+            string currentPronoun = playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
+            currentPronoun = currentPronoun.ToLower();
+
+            if (toRemove.ToLower().Equals(currentPronoun)) {
+                playerSubjectPronouns.Remove(playerSubjectPronouns[i]);
+                playerObjectPronouns.Remove(playerObjectPronouns[i]);
+                playerPossessivePronouns.Remove(playerPossessivePronouns[i]);
+
+                numPronouns--;
+                itemWasRemoved = true;
+                break;
+            }
+        }
+
+        if (!itemWasRemoved)
+            errorDisplayText.text = "\"" + toRemove + "\" was not removed as it was not in the list";
+        else
+            errorDisplayText.text = "";
+
+        removeBox.text = "";
+        removeBox.Select();
+
+        updateDisplayText();
+    }
+
+    private void updateDisplayText() {
+        pronounDisplayText.text = "Your Character's Pronouns:";
+        for (int i = 0; i < numPronouns; i++)
+        {
+            pronounDisplayText.text += "\n- " + playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
         }
     }
 }
