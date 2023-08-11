@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
-using Unity.VisualScripting;
 
 public class PronounGen : MonoBehaviour
 {
@@ -14,18 +11,25 @@ public class PronounGen : MonoBehaviour
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
 
+    [SerializeField] private GameObject player;
+    private PlayerInfo playerInfo;
 
-    /* Consider migrating pronoun info to txt files where I can store player data for saves */
-    List<string> playerSubjectPronouns = new List<string>();
-    List<string> playerObjectPronouns = new List<string>();
-    List<string> playerPossessivePronouns = new List<string>();
+    /* References to the objects in playerInfo.cs */
+    List<string> playerSubjectPronouns;
+    List<string> playerObjectPronouns;
+    List<string> playerPossessivePronouns;
 
-    private int numPronouns = 0;
+    private int numPronouns;
+
+    private void Awake()
+    {
+        playerInfo = player.GetComponent<PlayerInfo>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        ClearPronouns();
     }
 
     // Update is called once per frame
@@ -54,7 +58,7 @@ public class PronounGen : MonoBehaviour
         }
 
         if (!err) {
-            if (alreadyContainsPronoun(split))
+            if (AlreadyContainsPronoun(split))
             {
                 errorDisplayText.text = toAdd + " is already in your pronoun list";
 
@@ -67,7 +71,7 @@ public class PronounGen : MonoBehaviour
                 numPronouns++;
                 errorDisplayText.text = "";     
             
-                updateDisplayText();
+                UpdateDisplayText();
             }
 
             inputBox.text = "";
@@ -79,7 +83,7 @@ public class PronounGen : MonoBehaviour
     }
 
     //Pre-condition: split.Length = 3
-    private bool alreadyContainsPronoun(string[] split) {
+    private bool AlreadyContainsPronoun(string[] split) {
         for (int i = 0; i < numPronouns; i++) {
             if (playerSubjectPronouns[i] == split[0] && playerObjectPronouns[i] == split[1] && playerPossessivePronouns[i] == split[2])
                 return true;
@@ -110,17 +114,26 @@ public class PronounGen : MonoBehaviour
         }
 
         if (!itemWasRemoved)
-            errorDisplayText.text = "\"" + toRemove + "\" was not removed as it was not in the list";
+            errorDisplayText.text = "\"" + toRemove + "\" was not in your pronoun list";
         else
             errorDisplayText.text = "";
 
         removeBox.text = "";
         removeBox.Select();
 
-        updateDisplayText();
+        UpdateDisplayText();
     }
 
-    private void updateDisplayText() {
+    public void ClearPronouns() {
+        playerInfo.InitializeNewPronounLists();
+        playerSubjectPronouns = playerInfo.playerSubjectPronouns;
+        playerObjectPronouns = playerInfo.playerObjectPronouns;
+        playerPossessivePronouns = playerInfo.playerPossessivePronouns;
+        numPronouns = 0;
+        UpdateDisplayText();
+    }
+
+    private void UpdateDisplayText() {
         pronounDisplayText.text = "Your Character's Pronouns:";
         for (int i = 0; i < numPronouns; i++)
         {

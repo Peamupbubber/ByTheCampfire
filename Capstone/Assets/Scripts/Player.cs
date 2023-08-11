@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Rigidbody2D playerRb;
     [SerializeField] private float speed;
 
 
@@ -13,7 +12,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        //playerRb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
