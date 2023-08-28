@@ -19,8 +19,6 @@ public class PronounGen : MonoBehaviour
     List<string> playerObjectPronouns;
     List<string> playerPossessivePronouns;
 
-    private int numPronouns;
-
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
@@ -30,12 +28,6 @@ public class PronounGen : MonoBehaviour
     void Start()
     {
         ClearPronouns();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void AddNewPronoun() {
@@ -68,7 +60,7 @@ public class PronounGen : MonoBehaviour
                 playerObjectPronouns.Add(split[1]);
                 playerPossessivePronouns.Add(split[2]);
 
-                numPronouns++;
+                playerInfo.numPronouns++;
                 errorDisplayText.text = "";     
             
                 UpdateDisplayText();
@@ -84,7 +76,7 @@ public class PronounGen : MonoBehaviour
 
     //Pre-condition: split.Length = 3
     private bool AlreadyContainsPronoun(string[] split) {
-        for (int i = 0; i < numPronouns; i++) {
+        for (int i = 0; i < playerInfo.numPronouns; i++) {
             if (playerSubjectPronouns[i] == split[0] && playerObjectPronouns[i] == split[1] && playerPossessivePronouns[i] == split[2])
                 return true;
         }
@@ -97,7 +89,7 @@ public class PronounGen : MonoBehaviour
         bool itemWasRemoved = false;
 
 
-        for (int i = 0; i < numPronouns; i++)
+        for (int i = 0; i < playerInfo.numPronouns; i++)
         {
             string currentPronoun = playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
             currentPronoun = currentPronoun.ToLower();
@@ -107,7 +99,7 @@ public class PronounGen : MonoBehaviour
                 playerObjectPronouns.Remove(playerObjectPronouns[i]);
                 playerPossessivePronouns.Remove(playerPossessivePronouns[i]);
 
-                numPronouns--;
+                playerInfo.numPronouns--;
                 itemWasRemoved = true;
                 break;
             }
@@ -129,13 +121,12 @@ public class PronounGen : MonoBehaviour
         playerSubjectPronouns = playerInfo.playerSubjectPronouns;
         playerObjectPronouns = playerInfo.playerObjectPronouns;
         playerPossessivePronouns = playerInfo.playerPossessivePronouns;
-        numPronouns = 0;
         UpdateDisplayText();
     }
 
     private void UpdateDisplayText() {
-        pronounDisplayText.text = "Your Character's Pronouns:";
-        for (int i = 0; i < numPronouns; i++)
+        pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
+        for (int i = 0; i < playerInfo.numPronouns; i++)
         {
             pronounDisplayText.text += "\n- " + playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
         }

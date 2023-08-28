@@ -1,0 +1,1 @@
+Color picked object's material is being changed CORRECTLY, just doesn't look like it on the display

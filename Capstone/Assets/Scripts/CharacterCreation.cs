@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,34 +14,46 @@ public class CharacterCreation : MonoBehaviour
 
     private Canvas currentlyEnabledCanvas;
 
+    [SerializeField] private TMP_Text pronounDisplayText;
+    [SerializeField] private TMP_Text errorDisplayText;
+
+    [SerializeField] private GameObject player;
+    private PlayerInfo playerInfo;
+
+    [SerializeField] GameObject tempObj;
+
+    private void Awake()
+    {
+        playerInfo = player.GetComponent<PlayerInfo>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         currentlyEnabledCanvas = nameMenu;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void EnableNameMenu() {
-        currentlyEnabledCanvas.enabled = false;
+        bool err = MenuChanged(false);
+        if (err) return;
 
         nameMenu.enabled = true;
         currentlyEnabledCanvas = nameMenu;
     }
 
     public void EnablePronounMenu() {
-        currentlyEnabledCanvas.enabled = false;
+        bool err = MenuChanged(false);
+        if (err) return;
+
+        pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
 
         pronounMenu.enabled = true;
         currentlyEnabledCanvas = pronounMenu;
     }
 
     public void EnableAppearanceMenu() {
-        currentlyEnabledCanvas.enabled = false;
+        bool err = MenuChanged(false);
+        if (err) return;
 
         appearanceMenu.enabled = true;
         currentlyEnabledCanvas = appearanceMenu;
@@ -48,19 +61,43 @@ public class CharacterCreation : MonoBehaviour
 
     public void EnableColorsMenu()
     {
-        currentlyEnabledCanvas.enabled = false;
+        bool err = MenuChanged(true);
+        if (err) return;
 
         colorsMenu.enabled = true;
-        currentlyEnabledCanvas = appearanceMenu;
+        currentlyEnabledCanvas = colorsMenu;
     }
 
     public void EnableStartMenu()
     {
-        currentlyEnabledCanvas.enabled = false;
+        bool err = MenuChanged(false);
+        if (err) return;
 
         startMenu.enabled = true;
-        currentlyEnabledCanvas = appearanceMenu;
+        currentlyEnabledCanvas = startMenu;
     }
 
+    //Called any time a menu is changed, returns true if there is an error and the menu cannot be changed
+    private bool MenuChanged(bool toColors)
+    {
+        if (currentlyEnabledCanvas.Equals(nameMenu) && playerInfo.playerName == "")
+        {
+            errorDisplayText.text = "Player must have a name";
+            return true;
+        }
+        else if (currentlyEnabledCanvas.Equals(pronounMenu) && playerInfo.numPronouns == 0)
+        {
+            errorDisplayText.text = "Player must have at least one set of pronouns";
+            return true;
+        }
+        else
+            errorDisplayText.text = "";
+
+        //Things that always happen if menu changed successfully
+        currentlyEnabledCanvas.enabled = false;
+        tempObj.gameObject.SetActive(toColors);
+
+        return false;
+    }
 
 }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1732031078375427492}
   - component: {fileID: 1732031078375427493}
+  - component: {fileID: 1617727836}
+  - component: {fileID: 1617727838}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -48,3 +50,36 @@ MonoBehaviour:
   removeBox: {fileID: 0}
   pronounDisplayText: {fileID: 0}
   errorDisplayText: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &1617727836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732031078375427494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988a832cce7857c458017fec9bdf4d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameMenu: {fileID: 0}
+  pronounMenu: {fileID: 0}
+  appearanceMenu: {fileID: 0}
+  colorsMenu: {fileID: 0}
+  startMenu: {fileID: 0}
+  errorDisplayText: {fileID: 0}
+  player: {fileID: 0}
+  tempObj: {fileID: 0}
+--- !u!114 &1617727838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732031078375427494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3189d4491a516c45b93e64584078f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
