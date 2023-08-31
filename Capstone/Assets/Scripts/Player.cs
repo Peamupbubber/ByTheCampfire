@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
+
+    [SerializeField] private TMP_Text dialogueTextBox;
 
 
     // Start is called before the first frame update
@@ -17,7 +20,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if(dialogueTextBox.text == "")
+            Move();
     }
 
     private void Move()
