@@ -20,8 +20,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dialogueTextBox.text == "")
+        if (dialogueTextBox.text == "")
             Move();
+
     }
 
     private void Move()

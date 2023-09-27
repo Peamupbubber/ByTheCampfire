@@ -533,13 +533,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1400307617}
   - component: {fileID: 1400307616}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Super Duper Temporary Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1400307616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 1402845563}
   - component: {fileID: 1402845565}
   - component: {fileID: 1402845566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TEST_NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,8 +664,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1669464325
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 748ae8b33df036b46a86e0387f1602cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 2098748602}
   - component: {fileID: 2098748601}
   - component: {fileID: 2098748603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -778,8 +778,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1669464325
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 748ae8b33df036b46a86e0387f1602cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

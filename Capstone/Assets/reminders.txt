@@ -1,1 +1,6 @@
 Color picked object's material is being changed CORRECTLY, just doesn't look like it on the display
+
+
+
+Hard code dialogue or create a way to read it in from files? Probably hard code for this small of a game. Create individual scripts for each NPC then, perhaps inherit from an NPC script for basic functions? Like interactability.
+ - if they have their own set paths they need that hard coded in individual scripts too.
