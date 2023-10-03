@@ -17,10 +17,10 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
 
+    [SerializeField] GameObject tempObj;
+
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
-
-    [SerializeField] GameObject tempObj;
 
     private void Awake()
     {

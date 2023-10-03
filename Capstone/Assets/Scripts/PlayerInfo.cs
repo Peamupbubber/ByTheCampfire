@@ -16,6 +16,10 @@ public class PlayerInfo : MonoBehaviour
 
     [SerializeField] private TMP_InputField playerNameInputField;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void InitializeNewPronounLists() {
         playerSubjectPronouns = new List<string>();

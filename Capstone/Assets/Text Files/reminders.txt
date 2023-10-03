@@ -1,0 +1,21 @@
+Color picked object's material is being changed CORRECTLY, just doesn't look like it on the display
+
+
+
+Hard code dialogue or create a way to read it in from files? Probably hard code for this small of a game. Create individual scripts for each NPC then, perhaps inherit from an NPC script for basic functions? Like interactability.
+ - if they have their own set paths they need that hard coded in individual scripts too.
+
+ On first click:
+ 1. enter interaction
+ 1.5. Player cant move
+ 1.75. enable dialogue box
+ 2. output text
+ 3. wait until they click an option
+ 4. output next piece of dialogue
+ 5. repeat until last piece of dialogue is done
+ 6. Player can move
+ 7. Disable DB
+
+
+ Change to 3 response optons
+ figure out how to wait for button and leave everything else for after but NOT IN THE IENUMERATOR

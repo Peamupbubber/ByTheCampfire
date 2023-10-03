@@ -8,8 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
 
-    [SerializeField] private TMP_Text dialogueTextBox;
-
+    public bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +19,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueTextBox.text == "")
-            Move();
-
+        if (canMove) Move();
     }
 
     private void Move()

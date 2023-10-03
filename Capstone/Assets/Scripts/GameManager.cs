@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
         {
             errorDisplayText.text = "Player must have a name and at least one set of pronouns";
         }
-        else
+        else {
             scenesToLoad.Add(SceneManager.LoadSceneAsync("SampleScene"));
+            player.SetActive(true);
+        }
     }
 }
