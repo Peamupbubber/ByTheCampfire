@@ -1,6 +1,6 @@
 Color picked object's material is being changed CORRECTLY, just doesn't look like it on the display
 
-
+Player in SampleScene rn is copied from menu (shouldnt remain in game)
 
 Hard code dialogue or create a way to read it in from files? Probably hard code for this small of a game. Create individual scripts for each NPC then, perhaps inherit from an NPC script for basic functions? Like interactability.
  - if they have their own set paths they need that hard coded in individual scripts too.
@@ -16,6 +16,4 @@ Hard code dialogue or create a way to read it in from files? Probably hard code 
  6. Player can move
  7. Disable DB
 
-
- Change to 3 response optons
- figure out how to wait for button and leave everything else for after but NOT IN THE IENUMERATOR
+Abstract what's in Shopkeeper out to NPC and the abstract some of that out to Interactable

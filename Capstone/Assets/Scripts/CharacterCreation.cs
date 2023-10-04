@@ -17,6 +17,8 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
 
+    private PronounGen pronounGen;
+
     [SerializeField] GameObject tempObj;
 
     [SerializeField] private GameObject player;
@@ -25,6 +27,7 @@ public class CharacterCreation : MonoBehaviour
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
+        pronounGen = GetComponent<PronounGen>();
     }
 
     // Start is called before the first frame update
@@ -45,7 +48,8 @@ public class CharacterCreation : MonoBehaviour
         bool err = MenuChanged(false);
         if (err) return;
 
-        pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
+        //if (pronounDisplayText.text == "") pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
+        pronounGen.UpdateDisplayText();
 
         pronounMenu.enabled = true;
         currentlyEnabledCanvas = pronounMenu;
@@ -85,13 +89,8 @@ public class CharacterCreation : MonoBehaviour
             errorDisplayText.text = "Player must have a name";
             return true;
         }
-        else if (currentlyEnabledCanvas.Equals(pronounMenu) && playerInfo.numPronouns == 0)
-        {
-            errorDisplayText.text = "Player must have at least one set of pronouns";
-            return true;
-        }
-        else
-            errorDisplayText.text = "";
+
+        errorDisplayText.text = "";
 
         //Things that always happen if menu changed successfully
         currentlyEnabledCanvas.enabled = false;

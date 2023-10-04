@@ -124,7 +124,7 @@ public class PronounGen : MonoBehaviour
         UpdateDisplayText();
     }
 
-    private void UpdateDisplayText() {
+    public void UpdateDisplayText() {
         pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
         for (int i = 0; i < playerInfo.numPronouns; i++)
         {
