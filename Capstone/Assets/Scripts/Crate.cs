@@ -9,7 +9,7 @@ public class Crate : Interactable
 
         NewDialogueOutput("It's a crate...");
 
-        while (!DialogueSkipped()) { yield return null };
+        while (!DialogueSkipped()) { yield return null; }
 
         EndInteraction();
     }
