@@ -18,7 +18,7 @@ public class Shopkeeper : NPC
     }
 
     // This is how interactions between the player and an NPC will be represented
-    private IEnumerator Interaction()
+    private IEnumerator FirstInteraction()
     {
         StartInteractionWithResponse();
 
@@ -62,6 +62,6 @@ public class Shopkeeper : NPC
     }
 
     protected override void HandleCurrentInteraction() {
-        StartCoroutine(Interaction());
+        StartCoroutine(FirstInteraction());
     }
 }
