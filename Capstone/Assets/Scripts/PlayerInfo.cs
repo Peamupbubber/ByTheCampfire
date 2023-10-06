@@ -31,4 +31,19 @@ public class PlayerInfo : MonoBehaviour
     public void UpdatePlayerName() {
         playerName = playerNameInputField.text;
     }
+
+    /* Change these to get a random pronoun */
+    public string GetASubjectPronoun() {
+        return "They";
+    }
+
+    public string GetAnObjectPronoun()
+    {
+        return "Them";
+    }
+
+    public string GetAPossessivePronoun()
+    {
+        return "Theirs";
+    }
 }

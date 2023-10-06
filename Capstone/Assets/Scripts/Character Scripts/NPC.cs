@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public abstract class NPC : Interactable
 {
-    protected GameManager.Response response = GameManager.Response.None;
+    public GameManager.Response response = GameManager.Response.None;
     [SerializeField] private GameObject responseButtons;
+
+    protected bool altRoutineRunning = false;
 
     /* Checks if the player has responded to a line of dialogue */
     protected bool PlayerResponded()
@@ -18,6 +20,10 @@ public abstract class NPC : Interactable
 
     public void SetResponse(GameManager.Response newResponse) {
         response = newResponse;
+    }
+
+    public void ClearResponse() {
+        response = GameManager.Response.None;
     }
 
     protected void StartInteractionWithResponse()

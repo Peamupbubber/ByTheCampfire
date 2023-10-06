@@ -35,8 +35,6 @@ public class Shopkeeper : NPC
             case GameManager.Response.R1:
                 NewDialogueOutput("Good to meet you too! You know, ...");
 
-                while (!DialogueSkipped()) { yield return null; }
-
                 break;
 
             case GameManager.Response.R2:
@@ -44,19 +42,17 @@ public class Shopkeeper : NPC
 
                 //Show shop!
 
-                while (!DialogueSkipped()) { yield return null; }
-
                 break;
 
             case GameManager.Response.R3:
                 NewDialogueOutput("Hope to see you again!");
 
-                while (!DialogueSkipped()) { yield return null; }
-
                 break;
         }
+        
+        while (!DialogueSkipped()) { yield return null; }
 
-        response = GameManager.Response.None;
+        ClearResponse();
 
         EndInteractionWithResponse();
     }
