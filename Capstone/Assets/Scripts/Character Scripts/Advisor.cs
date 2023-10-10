@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class Advisor : NPC
@@ -70,7 +71,10 @@ public class Advisor : NPC
 
         //Play animation of leader turning to advisor
 
-        NewDialogueOutput("Are you sure " + playerInfo.GetASubjectPronoun() + " are the right fit for this position?");
+        string subjPronoun = playerInfo.GetASubjectPronoun();
+        string follow = subjPronoun.Equals("they") ? "are" : "is";
+
+        NewDialogueOutput("Are you sure " + subjPronoun + " " + follow + " the right fit for this position?");
 
         while (!DialogueSkipped()) { yield return null; }
 

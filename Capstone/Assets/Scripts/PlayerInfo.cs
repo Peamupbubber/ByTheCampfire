@@ -34,16 +34,39 @@ public class PlayerInfo : MonoBehaviour
 
     /* Change these to get a random pronoun */
     public string GetASubjectPronoun() {
-        return "They";
+        int numPronouns = playerSubjectPronouns.Count;
+        string pronoun = name;
+
+        if (numPronouns != 0) {
+            pronoun = playerSubjectPronouns[Random.Range(0, numPronouns)];
+        }
+
+        return pronoun;
     }
 
     public string GetAnObjectPronoun()
     {
-        return "Them";
+        int numPronouns = playerObjectPronouns.Count;
+        string pronoun = name;
+
+        if (numPronouns != 0)
+        {
+            pronoun = playerObjectPronouns[Random.Range(0, numPronouns)];
+        }
+
+        return pronoun;
     }
 
     public string GetAPossessivePronoun()
     {
-        return "Theirs";
+        int numPronouns = playerPossessivePronouns.Count;
+        string pronoun = name;
+
+        if (numPronouns != 0)
+        {
+            pronoun = playerPossessivePronouns[Random.Range(0, numPronouns)];
+        }
+
+        return pronoun;
     }
 }
