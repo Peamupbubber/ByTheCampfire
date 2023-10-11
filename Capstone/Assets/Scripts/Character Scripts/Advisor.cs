@@ -59,7 +59,7 @@ public class Advisor : NPC
 
         //Play animation of leader walking over
 
-        NewDialogueOutput("Hey" /* + leader's name */ + ", this is " + playerInfo.playerName + "! " + playerInfo.GetASubjectPronoun() + 
+        NewDialogueOutput("Hey" /* + leader's name */ + ", this is " + playerInfo.playerName + "! " + playerInfo.GetASubjectPronoun(true) + 
             " will be joining me today on a hunt for some raw materials.");
 
         while (!DialogueSkipped()) { yield return null; }
@@ -71,7 +71,7 @@ public class Advisor : NPC
 
         //Play animation of leader turning to advisor
 
-        string subjPronoun = playerInfo.GetASubjectPronoun();
+        string subjPronoun = playerInfo.GetASubjectPronoun(false);
         string follow = subjPronoun.Equals("they") ? "are" : "is";
 
         NewDialogueOutput("Are you sure " + subjPronoun + " " + follow + " the right fit for this position?");
@@ -79,7 +79,7 @@ public class Advisor : NPC
         while (!DialogueSkipped()) { yield return null; }
 
         /* Advisor */
-        NewDialogueOutput("Well of course, I wouldn't have chosen " + playerInfo.GetAnObjectPronoun() + " otherwise!");
+        NewDialogueOutput("Well of course, I wouldn't have chosen " + playerInfo.GetAnObjectPronoun(false) + " otherwise!");
 
         while (!DialogueSkipped()) { yield return null; }
 

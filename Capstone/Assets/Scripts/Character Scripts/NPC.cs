@@ -28,9 +28,10 @@ public abstract class NPC : Interactable
 
     protected void StartInteractionWithResponse()
     {
-        StartInteraction();
+        dialogueBox.transform.localPosition = gameManager.dialogueBoxResponseLocation;
         gameManager.SetCurrentNPC(this);
         responseButtons.gameObject.SetActive(true);
+        StartInteraction();
     }
 
     protected void EndInteractionWithResponse()

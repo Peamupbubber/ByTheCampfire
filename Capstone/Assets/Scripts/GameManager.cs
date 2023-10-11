@@ -28,36 +28,50 @@ public class GameManager : MonoBehaviour
 
     public void SetResponseButtonText1(string text)
     {
-        //SetResponseButtons(text == "");
-        responseButtonText1.text = text;
+        if (text != "")
+        {
+            responseButtonText1.text = text;
+            responseButtonText1.transform.parent.gameObject.SetActive(true);
+            SetResponseButtons();
+        }
+        else
+            responseButtonText1.transform.parent.gameObject.SetActive(false);
     }
 
     public void SetResponseButtonText2(string text)
     {
-        //SetResponseButtons(text == "");
-        responseButtonText2.text = text;
+        if (text != "")
+        {
+            responseButtonText2.text = text;
+            responseButtonText2.transform.parent.gameObject.SetActive(true);
+            SetResponseButtons();
+        }
+        else
+            responseButtonText2.transform.parent.gameObject.SetActive(false);
     }
 
     public void SetResponseButtonText3(string text)
     {
-        //SetResponseButtons(text == "");
-        responseButtonText3.text = text;
+        if (text != "")
+        {
+            responseButtonText3.text = text;
+            responseButtonText3.transform.parent.gameObject.SetActive(true);
+            SetResponseButtons();
+        }
+        else
+            responseButtonText3.transform.parent.gameObject.SetActive(false);
     }
 
-    //MAKE ALL THE OTHER ONES LOOK LIKE THIS
     public void SetResponseButtonText4(string text)
     {
-        //SetResponseButtons(text == "");
-        //responseButtonText4.text = text;
-        //responseButtonText4.GetComponentInParent<GameObject>().SetActive(false);
-        if (text == "")
+        if (text != "")
         {
-            responseButtonText4.transform.parent.gameObject.SetActive(false);
-        }
-        else {
-            SetResponseButtons();
             responseButtonText4.text = text;
+            responseButtonText4.transform.parent.gameObject.SetActive(true);
+            SetResponseButtons();
         }
+        else
+            responseButtonText4.transform.parent.gameObject.SetActive(false);
     }
 
     private void SetResponseButtons() {
@@ -81,8 +95,22 @@ public class GameManager : MonoBehaviour
             ClearResponseButtons();
         }
     }
-    public void Response2() { if (responseButtonText2.text != "")  currentInteractionsNPC.SetResponse(Response.R2); }
-    public void Response3() { if (responseButtonText3.text != "") currentInteractionsNPC.SetResponse(Response.R3); }
+    public void Response2()
+    {
+        if (responseButtonText2.text != "")
+        {
+            currentInteractionsNPC.SetResponse(Response.R2);
+            ClearResponseButtons();
+        }
+    }
+    public void Response3()
+    {
+        if (responseButtonText3.text != "")
+        {
+            currentInteractionsNPC.SetResponse(Response.R3);
+            ClearResponseButtons();
+        }
+    }
     public void Response4()
     {
         if (responseButtonText4.gameObject.activeSelf)

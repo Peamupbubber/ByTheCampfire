@@ -18,6 +18,11 @@ public class MenuManager : MonoBehaviour
         playerInfo = player.GetComponent<PlayerInfo>();
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void StartGame()
     {
         if (playerInfo.playerName == "")
@@ -26,7 +31,9 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            scenesToLoad.Add(SceneManager.LoadSceneAsync("SampleScene"));
+            playerInfo.UpdateCaptalLists();
+            scenesToLoad.Add(SceneManager.LoadSceneAsync("Game"));
+            gameObject.SetActive(false);
             player.SetActive(true);
         }
     }
