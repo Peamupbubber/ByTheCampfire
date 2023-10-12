@@ -6,19 +6,21 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-
-    public string playerName;
+    [SerializeField] private TMP_InputField playerNameInputField;
 
     public List<string> playerSubjectPronouns;
     public List<string> playerObjectPronouns;
     public List<string> playerPossessivePronouns;
-    public int numPronouns;
 
+    //don't need to be SF at the end
     [SerializeField] private List<string> playerSPCapital;
     [SerializeField] private List<string> playerOPCapital;
     [SerializeField] private List<string> playerPPCapital;
 
-    [SerializeField] private TMP_InputField playerNameInputField;
+
+    public string playerName;
+    public int numPronouns;
+    private int lastPronounIndex;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class PlayerInfo : MonoBehaviour
         playerObjectPronouns = new List<string>();
         playerPossessivePronouns = new List<string>();
         numPronouns = 0;
+        lastPronounIndex = -1;
 }
 
     public void UpdatePlayerName() {
@@ -56,11 +59,11 @@ public class PlayerInfo : MonoBehaviour
     }
 
     public string GetASubjectPronoun(bool cap) {
-        string pronoun = name;
+        string pronoun = playerName;
 
         if (numPronouns != 0) {
             List<string> l = cap ? playerSPCapital : playerSubjectPronouns;
-            pronoun = l[Random.Range(0, numPronouns)];
+            pronoun = l[GetPronounIndex()];
         }
 
         return pronoun;
@@ -68,12 +71,12 @@ public class PlayerInfo : MonoBehaviour
 
     public string GetAnObjectPronoun(bool cap)
     {
-        string pronoun = name;
+        string pronoun = playerName;
 
         if (numPronouns != 0) {
 
             List<string> l = cap ? playerOPCapital : playerObjectPronouns;
-            pronoun = l[Random.Range(0, numPronouns)];
+            pronoun = l[GetPronounIndex()];
         }
 
         return pronoun;
@@ -81,14 +84,23 @@ public class PlayerInfo : MonoBehaviour
 
     public string GetAPossessivePronoun(bool cap)
     {
-        string pronoun = name;
+        string pronoun = playerName;
 
         if (numPronouns != 0)
         {
             List<string> l = cap ? playerPPCapital : playerPossessivePronouns;
-            pronoun = l[Random.Range(0, numPronouns)];
+            pronoun = l[GetPronounIndex()];
         }
 
         return pronoun;
+    }
+
+    private int GetPronounIndex()
+    {
+        int endRange = lastPronounIndex == -1 ? numPronouns : numPronouns - 1;
+        int r = Random.Range(0, endRange);
+        r = r == lastPronounIndex ? numPronouns - 1 : r;
+        lastPronounIndex = r;
+        return r;
     }
 }

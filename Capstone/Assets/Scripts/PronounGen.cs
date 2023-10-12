@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PronounGen : MonoBehaviour
 {
@@ -19,9 +20,17 @@ public class PronounGen : MonoBehaviour
     List<string> playerObjectPronouns;
     List<string> playerPossessivePronouns;
 
+    [SerializeField] private GameObject displayLayout;
+    [SerializeField] private GameObject singlePronounbox;
+
+    public List<TMP_InputField> multiplierInputBoxes;
+    //public List<String> multiplierInputBoxesStr;
+
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
+        multiplierInputBoxes = new List<TMP_InputField>();
+        //multiplierInputBoxesStr = new List<String>();
     }
 
     // Start is called before the first frame update
@@ -51,17 +60,19 @@ public class PronounGen : MonoBehaviour
 
         if (!err) {
             if (AlreadyContainsPronoun(split))
-            {
                 errorDisplayText.text = toAdd + " is already in your pronoun list";
-
-            }
-            else {             
+            else {
                 playerSubjectPronouns.Add(split[0]);
                 playerObjectPronouns.Add(split[1]);
                 playerPossessivePronouns.Add(split[2]);
 
+                GameObject disp = Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform);
+                disp.GetComponent<TextMeshProUGUI>().text = toAdd;
+                multiplierInputBoxes.Add(disp.GetComponentInChildren<TMP_InputField>());
+                //multiplierInputBoxesStr.Add(disp.GetComponentInChildren<Transform>().GetComponentInChildren<Transform>().GetComponentInChildren<TextMeshProUGUI>().text);
+                //No
                 playerInfo.numPronouns++;
-                errorDisplayText.text = "";     
+                errorDisplayText.text = "";
             
                 UpdateDisplayText();
             }
@@ -98,6 +109,8 @@ public class PronounGen : MonoBehaviour
                 playerSubjectPronouns.Remove(playerSubjectPronouns[i]);
                 playerObjectPronouns.Remove(playerObjectPronouns[i]);
                 playerPossessivePronouns.Remove(playerPossessivePronouns[i]);
+
+                multiplierInputBoxes.RemoveAt(i);
 
                 playerInfo.numPronouns--;
                 itemWasRemoved = true;
