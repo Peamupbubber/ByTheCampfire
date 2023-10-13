@@ -2,94 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using Random = System.Random;
 
 public class PlayerInfo : MonoBehaviour
 {
     [SerializeField] private TMP_InputField playerNameInputField;
 
-    public List<string> playerSubjectPronouns;
-    public List<string> playerObjectPronouns;
-    public List<string> playerPossessivePronouns;
+    public List<string[]> pronouns;
+    public List<int> pronounQueue;
 
-    //don't need to be SF at the end
-    [SerializeField] private List<string> playerSPCapital;
-    [SerializeField] private List<string> playerOPCapital;
-    [SerializeField] private List<string> playerPPCapital;
+    public List<int> multipliers;
 
+    public enum pronoun_type { SUBJECT, OBJECT, POSSESSIVE};
+
+    private Random rng = new Random();
 
     public string playerName;
     public int numPronouns;
-    private int lastPronounIndex;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        pronounQueue = new List<int>();
+    }
+
+    private void CreatePronounQueue() {
+        for (int i = 0; i < numPronouns; i++) {
+            for (int j = 0; j < multipliers[i]; j++) {
+                pronounQueue.Add(i);
+            }
+        }
+
+        ShuffleQueue();
+    }
+
+    /* https://stackoverflow.com/questions/273313/randomize-a-listt */
+    private void ShuffleQueue() {
+        int n = pronounQueue.Count;
+        while (n > 1) {
+            n--;
+            int k = rng.Next(n + 1);
+            int v = pronounQueue[k];
+            pronounQueue[k] = pronounQueue[n];
+            pronounQueue[n] = v;
+        }
+    }
+
+    public void PrintPronouns() {
+        for (int i = 0; i < numPronouns; i++) {
+            Debug.Log(pronouns[i][0] + ", " + pronouns[i][1] + ", " + pronouns[i][2]);
+        }
     }
 
     public void InitializeNewPronounLists() {
-        playerSubjectPronouns = new List<string>();
-        playerObjectPronouns = new List<string>();
-        playerPossessivePronouns = new List<string>();
         numPronouns = 0;
-        lastPronounIndex = -1;
-}
+
+        multipliers = new List<int>();
+
+        pronouns = new List<string[]>();
+    }
 
     public void UpdatePlayerName() {
         playerName = playerNameInputField.text;
     }
 
-    /* set the capital lists equal to the pronoun lists but with the first letter capitalized */
-    public void UpdateCaptalLists() {
-        playerSPCapital = new List<string>();
-        playerOPCapital = new List<string>();
-        playerPPCapital = new List<string>();
-        string s;
-
-        for (int i = 0; i < numPronouns; i++) {
-            s = playerSubjectPronouns[i].ToUpper()[0] + playerSubjectPronouns[i].Substring(1);
-            playerSPCapital.Add(s);
-
-            s = playerObjectPronouns[i].ToUpper()[0] + playerObjectPronouns[i].Substring(1);
-            playerOPCapital.Add(s);
-
-            s = playerPossessivePronouns[i].ToUpper()[0] + playerPossessivePronouns[i].Substring(1);
-            playerPPCapital.Add(s);
-        }
-    }
-
-    public string GetASubjectPronoun(bool cap) {
+    public string GetAPronoun(pronoun_type type, bool cap) {
         string pronoun = playerName;
-
-        if (numPronouns != 0) {
-            List<string> l = cap ? playerSPCapital : playerSubjectPronouns;
-            pronoun = l[GetPronounIndex()];
-        }
-
-        return pronoun;
-    }
-
-    public string GetAnObjectPronoun(bool cap)
-    {
-        string pronoun = playerName;
-
-        if (numPronouns != 0) {
-
-            List<string> l = cap ? playerOPCapital : playerObjectPronouns;
-            pronoun = l[GetPronounIndex()];
-        }
-
-        return pronoun;
-    }
-
-    public string GetAPossessivePronoun(bool cap)
-    {
-        string pronoun = playerName;
-
-        if (numPronouns != 0)
-        {
-            List<string> l = cap ? playerPPCapital : playerPossessivePronouns;
-            pronoun = l[GetPronounIndex()];
+        if (numPronouns > 0) {
+            pronoun = pronouns[GetPronounIndex()][(int)type];
+            if (cap) pronoun = pronoun.ToUpper()[0] + pronoun.Substring(1);
         }
 
         return pronoun;
@@ -97,10 +78,12 @@ public class PlayerInfo : MonoBehaviour
 
     private int GetPronounIndex()
     {
-        int endRange = lastPronounIndex == -1 ? numPronouns : numPronouns - 1;
-        int r = Random.Range(0, endRange);
-        r = r == lastPronounIndex ? numPronouns - 1 : r;
-        lastPronounIndex = r;
+        if (pronounQueue.Count == 0)
+            CreatePronounQueue();
+
+        int r = pronounQueue[0];
+        pronounQueue.RemoveAt(0);
+
         return r;
     }
 }

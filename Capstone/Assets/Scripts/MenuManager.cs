@@ -31,7 +31,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            playerInfo.UpdateCaptalLists();
+            //playerInfo.UpdateCaptalLists();
             scenesToLoad.Add(SceneManager.LoadSceneAsync("Game"));
             gameObject.SetActive(false);
             player.SetActive(true);

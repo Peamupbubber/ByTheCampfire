@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class PronounGen : MonoBehaviour
 {
@@ -15,22 +16,15 @@ public class PronounGen : MonoBehaviour
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
 
-    /* References to the objects in playerInfo.cs */
-    List<string> playerSubjectPronouns;
-    List<string> playerObjectPronouns;
-    List<string> playerPossessivePronouns;
-
     [SerializeField] private GameObject displayLayout;
     [SerializeField] private GameObject singlePronounbox;
 
-    public List<TMP_InputField> multiplierInputBoxes;
-    //public List<String> multiplierInputBoxesStr;
+    [SerializeField] private List<GameObject> pronounDisplays;
 
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
-        multiplierInputBoxes = new List<TMP_InputField>();
-        //multiplierInputBoxesStr = new List<String>();
+        pronounDisplays = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -51,10 +45,12 @@ public class PronounGen : MonoBehaviour
              err = true;
         }
 
-        for (int i = 0; i < split.Length; i++) {
-            if (split[i].Length == 0) { 
-                err = true;
-                break;
+        if (!err) { 
+            for (int i = 0; i < split.Length; i++) {
+                if (split[i].Length == 0) { 
+                    err = true;
+                    break;
+                }
             }
         }
 
@@ -62,19 +58,12 @@ public class PronounGen : MonoBehaviour
             if (AlreadyContainsPronoun(split))
                 errorDisplayText.text = toAdd + " is already in your pronoun list";
             else {
-                playerSubjectPronouns.Add(split[0]);
-                playerObjectPronouns.Add(split[1]);
-                playerPossessivePronouns.Add(split[2]);
+                playerInfo.pronouns.Add(split);
 
-                GameObject disp = Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform);
-                disp.GetComponent<TextMeshProUGUI>().text = toAdd;
-                multiplierInputBoxes.Add(disp.GetComponentInChildren<TMP_InputField>());
-                //multiplierInputBoxesStr.Add(disp.GetComponentInChildren<Transform>().GetComponentInChildren<Transform>().GetComponentInChildren<TextMeshProUGUI>().text);
-                //No
+                pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
+                pronounDisplays[playerInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toAdd;
                 playerInfo.numPronouns++;
                 errorDisplayText.text = "";
-            
-                UpdateDisplayText();
             }
 
             inputBox.text = "";
@@ -88,7 +77,7 @@ public class PronounGen : MonoBehaviour
     //Pre-condition: split.Length = 3
     private bool AlreadyContainsPronoun(string[] split) {
         for (int i = 0; i < playerInfo.numPronouns; i++) {
-            if (playerSubjectPronouns[i] == split[0] && playerObjectPronouns[i] == split[1] && playerPossessivePronouns[i] == split[2])
+            if (playerInfo.pronouns[i][0] == split[0] && playerInfo.pronouns[i][1] == split[1] && playerInfo.pronouns[i][2] == split[2])
                 return true;
         }
 
@@ -102,15 +91,13 @@ public class PronounGen : MonoBehaviour
 
         for (int i = 0; i < playerInfo.numPronouns; i++)
         {
-            string currentPronoun = playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
+            string currentPronoun = playerInfo.pronouns[i][0] + "/" + playerInfo.pronouns[i][1] + "/" + playerInfo.pronouns[i][2];
             currentPronoun = currentPronoun.ToLower();
 
             if (toRemove.ToLower().Equals(currentPronoun)) {
-                playerSubjectPronouns.Remove(playerSubjectPronouns[i]);
-                playerObjectPronouns.Remove(playerObjectPronouns[i]);
-                playerPossessivePronouns.Remove(playerPossessivePronouns[i]);
+                playerInfo.pronouns.RemoveAt(i);
 
-                multiplierInputBoxes.RemoveAt(i);
+                RemovePronounDisplay(i);
 
                 playerInfo.numPronouns--;
                 itemWasRemoved = true;
@@ -125,23 +112,33 @@ public class PronounGen : MonoBehaviour
 
         removeBox.text = "";
         removeBox.Select();
-
-        UpdateDisplayText();
     }
 
     public void ClearPronouns() {
         playerInfo.InitializeNewPronounLists();
-        playerSubjectPronouns = playerInfo.playerSubjectPronouns;
-        playerObjectPronouns = playerInfo.playerObjectPronouns;
-        playerPossessivePronouns = playerInfo.playerPossessivePronouns;
-        UpdateDisplayText();
+
+        playerInfo.pronouns = new List<string[]>();
+
+        while (pronounDisplays.Count > 0) {
+            RemovePronounDisplay(0);
+        }
+    }
+
+    private void RemovePronounDisplay(int i) {
+        GameObject dispToRemove = pronounDisplays[i];
+        pronounDisplays.RemoveAt(i);
+        Destroy(dispToRemove);
     }
 
     public void UpdateDisplayText() {
         pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
-        for (int i = 0; i < playerInfo.numPronouns; i++)
-        {
-            pronounDisplayText.text += "\n- " + playerSubjectPronouns[i] + "/" + playerObjectPronouns[i] + "/" + playerPossessivePronouns[i];
+    }
+
+    //This might not be the best way, recreating the list every time
+    public void UpdateMultipliers() {
+        playerInfo.multipliers = new List<int>();
+        for (int i = 0; i < playerInfo.numPronouns; i++) {
+            playerInfo.multipliers.Add(pronounDisplays[i].GetComponent<PronounDisplay>().multiplier);
         }
     }
 }
