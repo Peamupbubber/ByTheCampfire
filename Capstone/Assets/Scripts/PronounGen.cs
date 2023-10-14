@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
-using Unity.VisualScripting;
 
 public class PronounGen : MonoBehaviour
 {
@@ -116,8 +115,6 @@ public class PronounGen : MonoBehaviour
 
     public void ClearPronouns() {
         playerInfo.InitializeNewPronounLists();
-
-        playerInfo.pronouns = new List<string[]>();
 
         while (pronounDisplays.Count > 0) {
             RemovePronounDisplay(0);

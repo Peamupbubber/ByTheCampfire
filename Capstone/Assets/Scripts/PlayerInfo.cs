@@ -8,6 +8,7 @@ public class PlayerInfo : MonoBehaviour
 {
     [SerializeField] private TMP_InputField playerNameInputField;
 
+    //These can be HideInInspector
     public List<string[]> pronouns;
     public List<int> pronounQueue;
 
@@ -56,9 +57,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void InitializeNewPronounLists() {
         numPronouns = 0;
-
         multipliers = new List<int>();
-
         pronouns = new List<string[]>();
     }
 
