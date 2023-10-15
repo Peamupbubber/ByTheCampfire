@@ -4,45 +4,44 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    
-    public Animator animator;
+    [SerializeField] private Sprite idle_f;
+    [SerializeField] private Sprite idle_l;
+    [SerializeField] private Sprite idle_r;
 
-    bool facingRight = true;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        float xDir = Input.GetAxis("Horizontal");
+
+        if (Input.GetKey(KeyCode.S))
+            animator.SetTrigger("IdleIdle");
+        else
         {
-            if (!facingRight)
+            if (xDir > 0)
             {
-                Vector3 currentScale = gameObject.transform.localScale;
-                currentScale.x *= -1;
-                gameObject.transform.localScale = currentScale;
-                facingRight = true;
+                animator.SetTrigger("Right Walk");
             }
-            animator.SetTrigger("Move");
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            if (facingRight)
+            else if (xDir < 0)
             {
-                Vector3 currentScale = gameObject.transform.localScale;
-                currentScale.x *= -1;
-                gameObject.transform.localScale = currentScale;
-                facingRight = false;
+                animator.SetTrigger("Left Walk");
             }
-            animator.SetTrigger("Move");
+
+            else
+            {
+                animator.SetTrigger("Idle");
+            }
         }
-        else {
-            animator.SetTrigger("Stop Moving");
-        }
+
     }
     
 }
