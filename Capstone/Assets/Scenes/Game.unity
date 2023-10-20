@@ -818,7 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c4209208c86514faa47aac28957bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 448709615}
 --- !u!212 &352591953
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -903,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &448709614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -971,7 +970,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1149,7 +1148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60603b675bf5686479e7f87d85f5aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 448709615}
   response: 4
   responseButtons: {fileID: 1526198656}
 --- !u!58 &838449842
@@ -1266,15 +1264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55382ab1027fda74eb3c297f884bf80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: 
-  playerSubjectPronouns: []
-  playerObjectPronouns: []
-  playerPossessivePronouns: []
-  numPronouns: 0
-  playerSPCapital: []
-  playerOPCapital: []
-  playerPPCapital: []
   playerNameInputField: {fileID: 0}
+  pronounQueue: 
+  multipliers: 
+  playerName: 
+  numPronouns: 0
 --- !u!114 &925462760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,7 +1803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ada0cc7380cea54fb7211d982304a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 448709615}
   response: 4
   responseButtons: {fileID: 1526198656}
 --- !u!1 &1498563538
@@ -1910,7 +1903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c4209208c86514faa47aac28957bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 448709615}
 --- !u!61 &1498563542
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public abstract class NPC : Interactable
 {
-    public GameManager.Response response = GameManager.Response.None;
+    [HideInInspector] public GameManager.Response response = GameManager.Response.None;
     [SerializeField] private GameObject responseButtons;
 
     protected bool altRoutineRunning = false;

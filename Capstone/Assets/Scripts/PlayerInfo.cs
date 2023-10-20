@@ -6,20 +6,24 @@ using Random = System.Random;
 
 public class PlayerInfo : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField playerNameInputField;
-
-    //These can be HideInInspector
-    public List<string[]> pronouns;
-    public List<int> pronounQueue;
-
-    public List<int> multipliers;
-
     public enum pronoun_type { SUBJECT, OBJECT, POSSESSIVE};
 
     private Random rng = new Random();
+    private TMP_InputField playerNameInputField;
+
+    [HideInInspector] public List<string[]> pronouns;
+
+    /* [HideInInspector] */ public List<int> pronounQueue;
+    /* [HideInInspector] */ public List<int> multipliers;
 
     public string playerName;
     public int numPronouns;
+
+    private void Awake()
+    {
+        playerNameInputField = GameObject.Find("PlayerNameInputField").GetComponent<TMP_InputField>();
+        gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -63,6 +67,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void UpdatePlayerName() {
         playerName = playerNameInputField.text;
+        if(playerName.Length > 0) playerName = playerName.ToUpper()[0] + playerName.Substring(1);
     }
 
     public string GetAPronoun(pronoun_type type, bool cap) {
@@ -71,6 +76,23 @@ public class PlayerInfo : MonoBehaviour
             pronoun = pronouns[GetPronounIndex()][(int)type];
             if (cap) pronoun = pronoun.ToUpper()[0] + pronoun.Substring(1);
         }
+
+        return pronoun;
+    }
+
+    //Returns a pronoun followed by a present tense verb ('is' or 'are' depending on the pronoun)
+    public string GetAPronounAndPTV(pronoun_type type, bool cap) {
+        string pronoun = GetAPronoun(type, cap);
+        string ptv = pronoun.Equals("they") ? "are" : "is";
+
+        return pronoun + " " + ptv;
+    }
+
+    public string GetAPossessivePronounWithS() {
+        string pronoun = GetAPronoun(pronoun_type.POSSESSIVE, false);
+
+        if (pronoun[pronoun.Length - 1] != 's')
+            pronoun += 's';
 
         return pronoun;
     }

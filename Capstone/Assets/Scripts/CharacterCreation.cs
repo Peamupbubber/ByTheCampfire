@@ -37,7 +37,7 @@ public class CharacterCreation : MonoBehaviour
     }
 
     public void EnableNameMenu() {
-        bool err = MenuChanged(false);
+        bool err = MenuChanged(true, false);
         if (err) return;
 
         nameMenu.enabled = true;
@@ -45,7 +45,7 @@ public class CharacterCreation : MonoBehaviour
     }
 
     public void EnablePronounMenu() {
-        bool err = MenuChanged(false);
+        bool err = MenuChanged(false, false);
         if (err) return;
 
         //if (pronounDisplayText.text == "") pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
@@ -56,7 +56,7 @@ public class CharacterCreation : MonoBehaviour
     }
 
     public void EnableAppearanceMenu() {
-        bool err = MenuChanged(false);
+        bool err = MenuChanged(false, false);
         if (err) return;
 
         appearanceMenu.enabled = true;
@@ -65,7 +65,7 @@ public class CharacterCreation : MonoBehaviour
 
     public void EnableColorsMenu()
     {
-        bool err = MenuChanged(true);
+        bool err = MenuChanged(false, true);
         if (err) return;
 
         colorsMenu.enabled = true;
@@ -74,7 +74,7 @@ public class CharacterCreation : MonoBehaviour
 
     public void EnableStartMenu()
     {
-        bool err = MenuChanged(false);
+        bool err = MenuChanged(false, false);
         if (err) return;
 
         startMenu.enabled = true;
@@ -82,9 +82,9 @@ public class CharacterCreation : MonoBehaviour
     }
 
     //Called any time a menu is changed, returns true if there is an error and the menu cannot be changed
-    private bool MenuChanged(bool toColors)
+    private bool MenuChanged(bool fromName, bool toColors)
     {
-        if (currentlyEnabledCanvas.Equals(nameMenu) && playerInfo.playerName == "")
+        if (!fromName && currentlyEnabledCanvas.Equals(nameMenu) && playerInfo.playerName == "")
         {
             errorDisplayText.text = "Player must have a name";
             return true;

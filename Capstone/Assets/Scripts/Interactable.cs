@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    /* All interactables must implement a way to handle their interaction */
+    /* All interactables must implement a way to handle their current interaction */
     protected abstract void HandleCurrentInteraction();
 
 
@@ -16,13 +16,15 @@ public abstract class Interactable : MonoBehaviour
     //cursorTexture = Texture2D.redTexture; //Something like this is in Start()
 
     protected GameManager gameManager;
-    [SerializeField] protected TMP_Text dialogueBox;
+    protected TextMeshProUGUI dialogueBox;
 
     private bool justClicked = false;
+    private const float waitTimeAfterClick = 0.3f;
 
     protected GameObject player;
     protected PlayerInfo playerInfo;
     protected Player playerScript;
+
     private void Awake()
     {
         player = GameObject.Find("Player");
@@ -30,6 +32,8 @@ public abstract class Interactable : MonoBehaviour
         playerScript = player.GetComponent<Player>();
 
         gameManager = FindObjectOfType<GameManager>();
+
+        dialogueBox = GameObject.Find("DialogueBox").GetComponent<TextMeshProUGUI>();
     }
 
     /* Writes the output string to the dialogue box and handles recent click waiting*/
@@ -45,7 +49,7 @@ public abstract class Interactable : MonoBehaviour
     /* Adds a buffer of time after the npc is clicked on so that the click first click does not skip the dialogue */
     private IEnumerator WaitAfterClick()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(waitTimeAfterClick);
 
         justClicked = false;
     }

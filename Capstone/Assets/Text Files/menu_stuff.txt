@@ -21,15 +21,9 @@ TODO: Account for pronoun display overflow once the actual sprites are there
 for possessive: check if last letter is 's', if it shouldnt be there in that case remove it.
 
 
-Create txt file or hardcoded list and check if the entered ones are included
-
-
-'Enter X's Pronouns:'
+Create txt file or hardcoded list for NPC pronoun options
 
 
 For pause menu, have character creation easily accessible and pretty similar to default creation, but start game button changed to 'return to game' or something
 
-Take the prefab of the single pronoun display and have it be instantiated under a layout group parent where it can be used to add a multiplier onto that set of pronouns
- - Keep a list of instances
- - keep a list of references to the input fields, the reference being set and added right after instantiation
- - when the input feild is changed update the multiplier
+Change pronoun input to be 3 boxes

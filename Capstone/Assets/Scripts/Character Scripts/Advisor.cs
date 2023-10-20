@@ -70,10 +70,10 @@ public class Advisor : NPC
 
         //Play animation of leader turning to advisor
 
-        string subjPronoun = playerInfo.GetAPronoun(PlayerInfo.pronoun_type.SUBJECT, false);
-        string follow = subjPronoun.Equals("they") ? "are" : "is";
+        //string subjPronoun = playerInfo.GetAPronoun(PlayerInfo.pronoun_type.SUBJECT, false);
+        //string follow = subjPronoun.Equals("they") ? "are" : "is";
 
-        NewDialogueOutput("Are you sure " + subjPronoun + " " + follow + " the right fit for this position?");
+        NewDialogueOutput("Are you sure " + playerInfo.GetAPronounAndPTV(PlayerInfo.pronoun_type.SUBJECT, false) + " the right fit for this position?");
 
         while (!DialogueSkipped()) { yield return null; }
 
