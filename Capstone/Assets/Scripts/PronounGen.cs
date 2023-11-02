@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PronounGen : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField inputBox;
-    [SerializeField] private TMP_InputField removeBox;
+    [SerializeField] private TMP_InputField subjInputField;
+    [SerializeField] private TMP_InputField objInputField;
+    [SerializeField] private TMP_InputField possInputField;
 
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
@@ -31,86 +33,85 @@ public class PronounGen : MonoBehaviour
         ClearPronouns();
     }
 
-    public void AddNewPronoun() {
-        string toAdd = inputBox.text;
-        toAdd = toAdd.ToLower();
-        toAdd = toAdd.Replace(" ", "");
-
-        string[] split = toAdd.Split("/");
-        bool err = false;
-
-        if (split.Length != 3) {
-             err = true;
-        }
-
-        if (!err) { 
-            for (int i = 0; i < split.Length; i++) {
-                if (split[i].Length == 0) { 
-                    err = true;
-                    break;
-                }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Slash)) {
+            if (subjInputField.isFocused) {
+                if (Input.GetKeyDown(KeyCode.Slash)) subjInputField.text = subjInputField.text.Substring(0, subjInputField.text.Length - 1);
+                objInputField.Select();
             }
-        }
-
-        if (!err) {
-            if (AlreadyContainsPronoun(split))
-                errorDisplayText.text = toAdd + " is already in your pronoun list";
-            else {
-                playerInfo.pronouns.Add(split);
-
-                pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
-                pronounDisplays[playerInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toAdd;
-                playerInfo.numPronouns++;
-                errorDisplayText.text = "";
+            else if (objInputField.isFocused) {
+                if (Input.GetKeyDown(KeyCode.Slash)) objInputField.text = objInputField.text.Substring(0, objInputField.text.Length - 1);
+                possInputField.Select();
             }
-
-            inputBox.text = "";
-            inputBox.Select();
+            else if (possInputField.isFocused) {
+                if (Input.GetKeyDown(KeyCode.Slash)) possInputField.text = possInputField.text.Substring(0, possInputField.text.Length - 1);
+                subjInputField.Select();
+            }
+            else
+                subjInputField.Select();
         }
-        else
-            errorDisplayText.text = "Pronouns must adhear to the above format";
-
+        else if (Input.GetKeyDown(KeyCode.Return)) {
+            AddNewPronoun();
+        }
     }
 
-    //Pre-condition: split.Length = 3
-    private bool AlreadyContainsPronoun(string[] split) {
-        for (int i = 0; i < playerInfo.numPronouns; i++) {
-            if (playerInfo.pronouns[i][0] == split[0] && playerInfo.pronouns[i][1] == split[1] && playerInfo.pronouns[i][2] == split[2])
-                return true;
-        }
+    public void AddNewPronoun() {
+        string[] pronouns = new string[3];
+        string toDisplay;
 
-        return false;
+        pronouns[0] = subjInputField.text.ToLower();
+        pronouns[1] = objInputField.text.ToLower();
+        pronouns[2] = possInputField.text.ToLower();
+        toDisplay = pronouns[0] + "/" + pronouns[1] + "/" + pronouns[2];
+
+        if (pronouns[0] == "" || pronouns[1] == "" || pronouns[2] == "") {
+            errorDisplayText.text = "All three pronoun types must be filled";
+        }
+        else {
+            playerInfo.pronouns.Add(pronouns);
+
+            pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
+            pronounDisplays[playerInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toDisplay;
+            pronounDisplays[playerInfo.numPronouns].GetComponentInChildren<Button>().onClick.AddListener(RemovePronoun);
+
+            playerInfo.numPronouns++;
+            errorDisplayText.text = "";
+
+            subjInputField.text = "";
+            objInputField.text = "";
+            possInputField.text = "";
+            subjInputField.Select();
+        }
     }
 
     public void RemovePronoun() {
-        string toRemove = removeBox.text;
-        bool itemWasRemoved = false;
+        for (int i = 0; i < playerInfo.numPronouns; i++) {
+            if (pronounDisplays[i].GetComponent<PronounDisplay>().removeClicked) {
+                string toRemove = pronounDisplays[i].GetComponent<TextMeshProUGUI>().text;
 
-
-        for (int i = 0; i < playerInfo.numPronouns; i++)
-        {
-            string currentPronoun = playerInfo.pronouns[i][0] + "/" + playerInfo.pronouns[i][1] + "/" + playerInfo.pronouns[i][2];
-            currentPronoun = currentPronoun.ToLower();
-
-            if (toRemove.ToLower().Equals(currentPronoun)) {
                 playerInfo.pronouns.RemoveAt(i);
 
                 RemovePronounDisplay(i);
 
                 playerInfo.numPronouns--;
-                itemWasRemoved = true;
                 break;
             }
         }
-
-        if (!itemWasRemoved)
-            errorDisplayText.text = "\"" + toRemove + "\" was not in your pronoun list";
-        else
-            errorDisplayText.text = "";
-
-        removeBox.text = "";
-        removeBox.Select();
     }
+
+    /* Might come in useful if I want to require not adding the same one
+    //Pre-condition: split.Length = 3
+    private bool AlreadyContainsPronoun(string[] split)
+    {
+        for (int i = 0; i < playerInfo.numPronouns; i++)
+        {
+            if (playerInfo.pronouns[i][0] == split[0] && playerInfo.pronouns[i][1] == split[1] && playerInfo.pronouns[i][2] == split[2])
+                return true;
+        }
+
+        return false;
+    } */
 
     public void ClearPronouns() {
         playerInfo.InitializeNewPronounLists();

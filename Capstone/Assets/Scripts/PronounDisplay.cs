@@ -9,10 +9,15 @@ public class PronounDisplay : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text sliderText;
 
-    public int multiplier = 1;
+    [HideInInspector] public int multiplier = 1;
+    [HideInInspector] public bool removeClicked = false;
 
     public void SetMultiplier() {
         multiplier = (int)slider.value;
         sliderText.text = "" + multiplier;
+    }
+
+    public void RemoveClicked() {
+        removeClicked = true;
     }
 }

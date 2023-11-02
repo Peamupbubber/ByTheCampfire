@@ -8,19 +8,20 @@ public class Test : MonoBehaviour
     [SerializeField] private Sprite idle_l;
     [SerializeField] private Sprite idle_r;
 
-    private Animator animator;
+    private Animator anim;
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         float xDir = Input.GetAxis("Horizontal");
 
         if (Input.GetKey(KeyCode.S))
@@ -41,7 +42,12 @@ public class Test : MonoBehaviour
                 animator.SetTrigger("Idle");
             }
         }
-
+        */
+        float xDir = Input.GetAxis("Horizontal");
+        if (xDir != 0)
+            anim.SetBool("Walking", true);
+        else
+            anim.SetBool("Walking", false);
     }
     
 }
