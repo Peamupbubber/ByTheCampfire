@@ -8,7 +8,7 @@ namespace DmeoInfoGamerHubAssets
     {
         public void SetColor(Color newColor)
         {
-            GetComponent<MeshRenderer>().material.color = newColor;
+            GetComponent<SpriteRenderer>().color = newColor;
             //Debug.Log(newColor);
         }
     }

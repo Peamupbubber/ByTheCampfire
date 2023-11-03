@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
 
     public bool canMove = true;
+    public bool paused = true;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove) Move();
+        if (canMove && !paused) Move();
     }
 
     private void Move()
@@ -38,5 +39,9 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x + horizontal * Time.deltaTime * speed, gameObject.transform.position.y + vertical * Time.deltaTime * speed);
+    }
+
+    public void PausePressed() {
+        paused = !paused;
     }
 }

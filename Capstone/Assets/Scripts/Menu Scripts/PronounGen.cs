@@ -74,7 +74,9 @@ public class PronounGen : MonoBehaviour
             pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
             pronounDisplays[playerInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toDisplay;
             pronounDisplays[playerInfo.numPronouns].GetComponentInChildren<Button>().onClick.AddListener(RemovePronoun);
+            pronounDisplays[playerInfo.numPronouns].GetComponentInChildren<PronounDisplay>().playerInfo = playerInfo;
 
+            playerInfo.pronounsChanged = true;
             playerInfo.numPronouns++;
             errorDisplayText.text = "";
 
@@ -94,6 +96,7 @@ public class PronounGen : MonoBehaviour
 
                 RemovePronounDisplay(i);
 
+                playerInfo.pronounsChanged = true;
                 playerInfo.numPronouns--;
                 break;
             }
@@ -115,6 +118,7 @@ public class PronounGen : MonoBehaviour
 
     public void ClearPronouns() {
         playerInfo.InitializeNewPronounLists();
+        playerInfo.pronounsChanged = true;
 
         while (pronounDisplays.Count > 0) {
             RemovePronounDisplay(0);

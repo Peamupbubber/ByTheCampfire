@@ -19,6 +19,8 @@ public class PlayerInfo : MonoBehaviour
     public string playerName;
     public int numPronouns;
 
+    public bool pronounsChanged = false;
+
     private void Awake()
     {
         playerNameInputField = GameObject.Find("PlayerNameInputField").GetComponent<TMP_InputField>();
@@ -31,7 +33,13 @@ public class PlayerInfo : MonoBehaviour
         pronounQueue = new List<int>();
     }
 
-    private void CreatePronounQueue() {
+    public void CreatePronounQueue() {
+        //Remake the queue incase it's being called from MenuManager
+        if (pronounsChanged) { 
+            pronounQueue = new List<int>();
+            pronounsChanged = false;
+        }
+
         for (int i = 0; i < numPronouns; i++) {
             for (int j = 0; j < multipliers[i]; j++) {
                 pronounQueue.Add(i);
@@ -106,5 +114,9 @@ public class PlayerInfo : MonoBehaviour
         pronounQueue.RemoveAt(0);
 
         return r;
+    }
+
+    public void Pronounschanged() {
+        pronounsChanged = true;
     }
 }

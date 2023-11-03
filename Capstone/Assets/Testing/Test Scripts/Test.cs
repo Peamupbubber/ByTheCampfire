@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private Sprite idle_f;
-    [SerializeField] private Sprite idle_l;
-    [SerializeField] private Sprite idle_r;
+    //[SerializeField] private Sprite idle_f;
+    //[SerializeField] private Sprite idle_l;
+    //[SerializeField] private Sprite idle_r;
 
     private Animator anim;
     private SpriteRenderer spriteRenderer;

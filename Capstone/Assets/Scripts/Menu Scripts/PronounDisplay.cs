@@ -12,9 +12,12 @@ public class PronounDisplay : MonoBehaviour
     [HideInInspector] public int multiplier = 1;
     [HideInInspector] public bool removeClicked = false;
 
+    [HideInInspector] public PlayerInfo playerInfo;
+
     public void SetMultiplier() {
         multiplier = (int)slider.value;
         sliderText.text = "" + multiplier;
+        playerInfo.pronounsChanged = true;
     }
 
     public void RemoveClicked() {

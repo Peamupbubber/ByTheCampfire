@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private GameObject menuManager; //Might not need
+    private GameObject menu;
+
     [SerializeField] private GameObject responseButtons;
     [SerializeField] private TMP_Text responseButtonText1;
     [SerializeField] private TMP_Text responseButtonText2;
@@ -18,12 +21,29 @@ public class GameManager : MonoBehaviour
 
     public NPC currentInteractionsNPC;
 
+    private GameObject player;
+    private Player playerScript;
+
     public enum Response { R1, R2, R3, R4, None }
 
     private void Start()
     {
         dialogueBoxResponseLocation = dialogueBox.transform.localPosition;
         dialogueBoxCenterLocation = new Vector3(0f, dialogueBox.transform.localPosition.y, dialogueBox.transform.localPosition.z);
+
+        menuManager = GameObject.Find("Menu Manager");
+        menu = menuManager.transform.Find("Menu").gameObject;
+
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<Player>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerScript.paused) {
+            menu.SetActive(!menu.activeSelf);
+            playerScript.PausePressed();
+        }
     }
 
     public void SetResponseButtonText1(string text)

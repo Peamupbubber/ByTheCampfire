@@ -12,6 +12,11 @@ public abstract class NPC : Interactable
 
     protected bool altRoutineRunning = false;
 
+    private void Start()
+    {
+        responseButtons = GameObject.Find("Response Buttons");
+    }
+
     /* Checks if the player has responded to a line of dialogue */
     protected bool PlayerResponded()
     {
