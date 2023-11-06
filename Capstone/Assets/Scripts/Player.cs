@@ -8,14 +8,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
 
-    public bool canMove = true;
-    public bool paused = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Application.targetFrameRate = 60;
-    }
+    [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool paused = true;
 
     // Update is called once per frame
     void Update()

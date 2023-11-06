@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         dialogueBoxResponseLocation = dialogueBox.transform.localPosition;
         dialogueBoxCenterLocation = new Vector3(0f, dialogueBox.transform.localPosition.y, dialogueBox.transform.localPosition.z);
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerScript.paused) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerScript.paused && dialogueBox.text == "") {
             menu.SetActive(!menu.activeSelf);
             playerScript.PausePressed();
         }

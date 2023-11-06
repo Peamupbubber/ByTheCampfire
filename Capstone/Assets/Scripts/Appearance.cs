@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Appearance : MonoBehaviour
@@ -17,12 +16,6 @@ public class Appearance : MonoBehaviour
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
         anim.runtimeAnimatorController = animOverride;
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetSprite(int i) {

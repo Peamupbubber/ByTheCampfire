@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
+
 public abstract class Interactable : MonoBehaviour
 {
     /* All interactables must implement a way to handle their current interaction */
@@ -19,6 +21,7 @@ public abstract class Interactable : MonoBehaviour
     protected TextMeshProUGUI dialogueBox;
 
     private bool justClicked = false;
+    private bool playerInRange = false;
     private const float waitTimeAfterClick = 0.3f;
 
     protected GameObject player;
@@ -75,10 +78,24 @@ public abstract class Interactable : MonoBehaviour
         dialogueBox.gameObject.SetActive(false);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+            Debug.Log("hey");
+        if (collision.gameObject.CompareTag("Player")) {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            playerInRange = false;
+    }
+
     private void OnMouseOver()
     {
         //Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-        if (Input.GetMouseButtonDown(1) && dialogueBox.text == "")
+        if (Input.GetMouseButtonDown(1) && dialogueBox.text == "" && playerInRange)
         {
             HandleCurrentInteraction();
         }

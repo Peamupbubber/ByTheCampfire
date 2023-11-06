@@ -36,6 +36,7 @@ public class CharacterCreation : MonoBehaviour
         currentlyEnabledCanvas = nameMenu;
     }
 
+    //Temp anim edit func
     public void Legs(int i) {
         Debug.Log("Legs: " + i);
     }
