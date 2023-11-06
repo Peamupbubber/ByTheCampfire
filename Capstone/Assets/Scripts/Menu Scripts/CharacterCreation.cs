@@ -36,6 +36,10 @@ public class CharacterCreation : MonoBehaviour
         currentlyEnabledCanvas = nameMenu;
     }
 
+    public void Legs(int i) {
+        Debug.Log("Legs: " + i);
+    }
+
     public void EnableNameMenu() {
         bool err = MenuChanged(true, false);
         if (err) return;
@@ -48,7 +52,6 @@ public class CharacterCreation : MonoBehaviour
         bool err = MenuChanged(false, false);
         if (err) return;
 
-        //if (pronounDisplayText.text == "") pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
         pronounGen.UpdateDisplayText();
 
         pronounMenu.enabled = true;
@@ -56,7 +59,7 @@ public class CharacterCreation : MonoBehaviour
     }
 
     public void EnableAppearanceMenu() {
-        bool err = MenuChanged(false, false);
+        bool err = MenuChanged(false, true);
         if (err) return;
 
         appearanceMenu.enabled = true;
@@ -82,7 +85,7 @@ public class CharacterCreation : MonoBehaviour
     }
 
     //Called any time a menu is changed, returns true if there is an error and the menu cannot be changed
-    private bool MenuChanged(bool fromName, bool toColors)
+    private bool MenuChanged(bool fromName, bool enableSprite)
     {
         if (!fromName && currentlyEnabledCanvas.Equals(nameMenu) && playerInfo.playerName == "")
         {
@@ -94,7 +97,7 @@ public class CharacterCreation : MonoBehaviour
 
         //Things that always happen if menu changed successfully
         currentlyEnabledCanvas.enabled = false;
-        tempObj.gameObject.SetActive(toColors);
+        tempObj.gameObject.SetActive(enableSprite);
 
         return false;
     }
