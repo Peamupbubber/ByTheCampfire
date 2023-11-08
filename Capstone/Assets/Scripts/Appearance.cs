@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Appearance : MonoBehaviour
 {
-    [SerializeField] private AnimationClip[] legs;
+    [SerializeField] private AnimationClip[] legsWalking;
+
+    [SerializeField] private AnimationClip[] legsIdle;
+    [SerializeField] private AnimationClip[] legsIdleFront;
+    [SerializeField] private AnimationClip[] legsIdleBack;
+
+
     public Animator anim;
     public AnimatorOverrideController animOverride;
-    public SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -15,12 +20,17 @@ public class Appearance : MonoBehaviour
         anim = GetComponent<Animator>();
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
         anim.runtimeAnimatorController = animOverride;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetSprite(int i) {
-        Debug.Log("Called with " + i);
-        animOverride["Legs_1"] = legs[i];
+    public void SetColor(Color newColor) {
+        GetComponent<SpriteRenderer>().color = newColor;
     }
 
+    public void SetLegAnimation(int i) {
+        animOverride["Idle"] = legsIdle[i];
+        animOverride["Idlef"] = legsIdleFront[i];
+        animOverride["Idleb"] = legsIdleBack[i];
+
+        animOverride["Walking"] = legsWalking[i];
+    }
 }

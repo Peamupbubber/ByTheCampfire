@@ -395,7 +395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 59b0a49011db3cf48825fb07caf951a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6571d95e54538664b94d7fd81b76be17, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9527fa73562c4674586d2f56ef7a8a65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6571d95e54538664b94d7fd81b76be17, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
+  m_text: 'Name
 
 '
   m_isRightToLeft: 0
@@ -1134,12 +1134,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 50
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2107,10 +2107,14 @@ PrefabInstance:
     - target: {fileID: 1812283204550572528, guid: efdedad269f478c42b25cc4f6b7a7cbc, type: 3}
       propertyPath: ColorPickerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1538181615}
+      objectReference: {fileID: 1538181616}
     - target: {fileID: 1812283204550572528, guid: efdedad269f478c42b25cc4f6b7a7cbc, type: 3}
       propertyPath: ColorPickerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812283204550572528, guid: efdedad269f478c42b25cc4f6b7a7cbc, type: 3}
+      propertyPath: ColorPickerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Appearance, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2132220055912404632, guid: efdedad269f478c42b25cc4f6b7a7cbc, type: 3}
       propertyPath: m_IsActive
@@ -2258,7 +2262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 114614.05}
+  m_AnchoredPosition: {x: 0, y: 323409.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &696940810
@@ -4718,10 +4722,9 @@ GameObject:
   - component: {fileID: 1538181613}
   - component: {fileID: 1538181612}
   - component: {fileID: 1538181611}
-  - component: {fileID: 1538181615}
   - component: {fileID: 1538181616}
   m_Layer: 0
-  m_Name: Temp Sprite To Edit
+  m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4826,18 +4829,6 @@ Transform:
   m_Father: {fileID: 1768069123}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1538181615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538181610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320cfb494dc8ce64ea032a21ae007640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1538181616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4850,12 +4841,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c68d56a8ba0f4148b90fd4e09b8667c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  legs:
+  legsWalking:
   - {fileID: 7400000, guid: f96a518f60c98b54a8e34239500d2316, type: 2}
+  - {fileID: 7400000, guid: b885a054666b57847b41493229859ace, type: 2}
+  legsIdle:
   - {fileID: 7400000, guid: de2cc2e699c0ef64887d422554be32de, type: 2}
+  - {fileID: 7400000, guid: 64cc6475e80f5c04997c79fd2074ba8c, type: 2}
+  legsIdleFront:
+  - {fileID: 7400000, guid: 79dba2929d44bdb49995e617da1da20c, type: 2}
+  - {fileID: 7400000, guid: 2ac9b72727417664b8f489b13a3b7345, type: 2}
+  legsIdleBack:
+  - {fileID: 7400000, guid: b5773b4cd0e68224c86a3a091d344657, type: 2}
+  - {fileID: 7400000, guid: 35c3a21c70970aa4a90e53c4e22e8a00, type: 2}
   anim: {fileID: 0}
   animOverride: {fileID: 0}
-  spriteRenderer: {fileID: 0}
 --- !u!1 &1567672912
 GameObject:
   m_ObjectHideFlags: 0
@@ -5223,7 +5222,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -160.2, y: 0}
-  m_SizeDelta: {x: 48, y: 39}
+  m_SizeDelta: {x: 27, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1616486447
 MonoBehaviour:
@@ -5271,7 +5270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1538181616}
         m_TargetAssemblyTypeName: Appearance, Assembly-CSharp
-        m_MethodName: SetSprite
+        m_MethodName: SetLegAnimation
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5301,7 +5300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -557818009, guid: 4405cf14a7ae1f6409e2787a6d1a3641, type: 3}
+  m_Sprite: {fileID: 183785661, guid: 9c8d25a529dd84b479dbbf66671fa095, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6586,7 +6585,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1538181616}
         m_TargetAssemblyTypeName: Appearance, Assembly-CSharp
-        m_MethodName: SetSprite
+        m_MethodName: SetLegAnimation
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7065,7 +7064,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Pronouns
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7092,12 +7093,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 50
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
