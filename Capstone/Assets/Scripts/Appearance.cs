@@ -5,6 +5,8 @@ using UnityEngine;
 public class Appearance : MonoBehaviour
 {
     [SerializeField] private AnimationClip[] legsWalking;
+    [SerializeField] private AnimationClip[] legsWalkingFront;
+    [SerializeField] private AnimationClip[] legsWalkingBack;
 
     [SerializeField] private AnimationClip[] legsIdle;
     [SerializeField] private AnimationClip[] legsIdleFront;
@@ -26,11 +28,14 @@ public class Appearance : MonoBehaviour
         GetComponent<SpriteRenderer>().color = newColor;
     }
 
+    //Called by the button sprites in the appearance menu
     public void SetLegAnimation(int i) {
         animOverride["Idle"] = legsIdle[i];
         animOverride["Idlef"] = legsIdleFront[i];
         animOverride["Idleb"] = legsIdleBack[i];
 
         animOverride["Walking"] = legsWalking[i];
+        animOverride["Walkingf"] = legsWalkingFront[i];
+        animOverride["Walkingb"] = legsWalkingBack[i];
     }
 }
