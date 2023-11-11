@@ -4,6 +4,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/* This script may be refactored to become a controller for the seperate parts of the player */
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;

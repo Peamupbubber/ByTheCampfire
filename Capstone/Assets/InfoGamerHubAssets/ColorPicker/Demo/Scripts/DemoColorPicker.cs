@@ -9,7 +9,6 @@ namespace DmeoInfoGamerHubAssets
         public void SetColor(Color newColor)
         {
             GetComponent<SpriteRenderer>().color = newColor;
-            //Debug.Log(newColor);
         }
     }
 }
