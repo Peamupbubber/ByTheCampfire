@@ -80,7 +80,6 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            Debug.Log("hey");
         if (collision.gameObject.CompareTag("Player")) {
             playerInRange = true;
         }
