@@ -13,13 +13,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Text errorDisplayText;
 
     [SerializeField] private GameObject player;
-    private Player playerScript;
     private PlayerInfo playerInfo;
+
+    [SerializeField] private PlayerPreview playerPreview;
 
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
-        playerScript = player.GetComponent<Player>();
         menu = transform.Find("Menu").gameObject;
     }
 
@@ -34,15 +34,25 @@ public class MenuManager : MonoBehaviour
         {
             errorDisplayText.text = "Player must have a name";
         }
+        else if (!HasCompleteSprite())
+        {
+            errorDisplayText.text = "Player must have a complete sprite";
+        }
         else
         {
-            if(!SceneManager.GetActiveScene().name.Equals("Game"))
+            if (!SceneManager.GetActiveScene().name.Equals("Game"))
                 scenesToLoad.Add(SceneManager.LoadSceneAsync("Game"));
             menu.SetActive(false);
             player.SetActive(true);
-            playerScript.paused = false;
-            if(playerInfo.pronounsChanged)
+            playerInfo.paused = false;
+            if (playerInfo.pronounsChanged)
                 playerInfo.CreatePronounQueue();
         }
+    }
+
+    //This will need to change when hair is added. Also could maybe be more modular somehow
+    public bool HasCompleteSprite()
+    {
+        return playerPreview.legsImage.enabled && playerPreview.topImage.enabled && playerPreview.torsoImage.enabled;
     }
 }

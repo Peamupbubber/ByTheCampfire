@@ -15,8 +15,7 @@ public class PlayerLegs : MonoBehaviour
     public Animator anim;
     public AnimatorOverrideController animOverride;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);

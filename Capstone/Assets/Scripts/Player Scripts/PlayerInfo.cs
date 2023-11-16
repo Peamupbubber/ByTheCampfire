@@ -21,16 +21,19 @@ public class PlayerInfo : MonoBehaviour
 
     public bool pronounsChanged = false;
 
+    [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool paused = true;
+
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        pronounQueue = new List<int>();
         playerNameInputField = GameObject.Find("PlayerNameInputField").GetComponent<TMP_InputField>();
-        gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        pronounQueue = new List<int>();
+        gameObject.SetActive(false);
     }
 
     public void CreatePronounQueue() {
@@ -118,5 +121,10 @@ public class PlayerInfo : MonoBehaviour
 
     public void Pronounschanged() {
         pronounsChanged = true;
+    }
+
+    public void PausePressed()
+    {
+        paused = !paused;
     }
 }

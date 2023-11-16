@@ -6,25 +6,26 @@ public class AnimMovement : MonoBehaviour
 {
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    private PlayerInfo playerInfo;
 
     [SerializeField] private float speed = 2f;
 
     private float facingX = 1;
     private float facingY = 0;
 
-    private bool tempCanMove = false;
+    //Rigt now the translate is applied for each sprite. no. make it different
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerInfo = transform.parent.GetComponent<PlayerInfo>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Move();
+        if(playerInfo.canMove && !playerInfo.paused)
+            Move();
     }
 
     private void Move()
@@ -35,7 +36,7 @@ public class AnimMovement : MonoBehaviour
         DetermineAnim(xDir, yDir);
 
         Vector2 movement = new Vector2(xDir, yDir);
-        if(tempCanMove) transform.Translate(movement * Time.deltaTime * speed);
+        transform.parent.Translate(movement * Time.deltaTime * speed);
     }
 
 

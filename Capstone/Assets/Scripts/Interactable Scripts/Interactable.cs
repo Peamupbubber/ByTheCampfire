@@ -26,13 +26,11 @@ public abstract class Interactable : MonoBehaviour
 
     protected GameObject player;
     protected PlayerInfo playerInfo;
-    protected Player playerScript;
 
     private void Awake()
     {
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
-        playerScript = player.GetComponent<Player>();
 
         gameManager = FindObjectOfType<GameManager>();
 
@@ -66,14 +64,14 @@ public abstract class Interactable : MonoBehaviour
     /* Things that happen on every interaction beginning */
     protected void StartInteraction()
     {
-        playerScript.canMove = false;
+        playerInfo.canMove = false;
         dialogueBox.gameObject.SetActive(true);
     }
 
     /* Things that happen on every interaction ending */
     protected void EndInteraction()
     {
-        playerScript.canMove = true;
+        playerInfo.canMove = true;
         dialogueBox.text = "";
         dialogueBox.gameObject.SetActive(false);
     }

@@ -19,7 +19,7 @@ public class CharacterCreation : MonoBehaviour
 
     private PronounGen pronounGen;
 
-    [SerializeField] GameObject tempObj;
+    [SerializeField] GameObject playerPreview;
 
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
@@ -30,15 +30,16 @@ public class CharacterCreation : MonoBehaviour
         pronounGen = GetComponent<PronounGen>();
     }
 
-    // Start is called before the first frame update
+    // Enable the correct canvases
     void Start()
     {
-        currentlyEnabledCanvas = nameMenu;
-    }
+        nameMenu.enabled = true;
+        pronounMenu.enabled = false;
+        appearanceMenu.enabled = false;
+        colorsMenu.enabled = false;
+        startMenu.enabled = false;
 
-    //Temp anim edit func
-    public void Legs(int i) {
-        Debug.Log("Legs: " + i);
+        currentlyEnabledCanvas = nameMenu;
     }
 
     public void EnableNameMenu() {
@@ -98,7 +99,7 @@ public class CharacterCreation : MonoBehaviour
 
         //Things that always happen if menu changed successfully
         currentlyEnabledCanvas.enabled = false;
-        tempObj.gameObject.SetActive(enableSprite);
+        playerPreview.gameObject.SetActive(enableSprite);
 
         return false;
     }

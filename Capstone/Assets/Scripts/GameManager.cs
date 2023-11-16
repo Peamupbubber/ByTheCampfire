@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public NPC currentInteractionsNPC;
 
     private GameObject player;
-    private Player playerScript;
+    private PlayerInfo playerInfo;
 
     public enum Response { R1, R2, R3, R4, None }
 
@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
         menu = menuManager.transform.Find("Menu").gameObject;
 
         player = GameObject.Find("Player");
-        playerScript = player.GetComponent<Player>();
+        playerInfo = player.GetComponent<PlayerInfo>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerScript.paused && dialogueBox.text == "") {
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerInfo.paused && dialogueBox.text == "") {
             menu.SetActive(!menu.activeSelf);
-            playerScript.PausePressed();
+            playerInfo.PausePressed();
         }
     }
 
