@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 512cb3c6909edee48b7e1d30d3d06502
+guid: 9e3a36a554f88854198aca7e260752a0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Legs_2_2_500p_0
+      name: torso_2_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 5
-        width: 45
-        height: 50
+        x: 20
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52e5d373c27d81243b77b09fc4913242
-      internalID: 240624478
+      spriteID: e32fe07daf29f8744973600d041ec6f0
+      internalID: -1363046888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_1
+      name: torso_2_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 5
-        width: 80
-        height: 50
+        x: 105
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7b5d692417f83843bfae24f4096c4c6
-      internalID: -1464158047
+      spriteID: c8c5bc585318bb342bb81da18b84e522
+      internalID: 950049987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_2
+      name: torso_2_2
       rect:
         serializedVersion: 2
-        x: 185
-        y: 5
-        width: 45
-        height: 50
+        x: 195
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44d53dd418fe5174bac7eda58a39663c
-      internalID: 1440665658
+      spriteID: 06a655e228779d14fb73feb4d2c12cbf
+      internalID: 672235052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_3
+      name: torso_2_3
       rect:
         serializedVersion: 2
-        x: 250
-        y: 5
-        width: 80
-        height: 50
+        x: 285
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c84d7fd4d539afa4e9790bea73505e54
-      internalID: -2073940864
+      spriteID: 564bb10abac40064082316deed16edc9
+      internalID: -1036342844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_4
+      name: torso_2_4
       rect:
         serializedVersion: 2
-        x: 395
-        y: 5
-        width: 55
-        height: 50
+        x: 415
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aaf019c7c6c66040b65e7d67794e86d
-      internalID: 308399581
+      spriteID: 35c6d3fa05d651b46b0491f1fc07b295
+      internalID: -326307482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_5
+      name: torso_2_5
       rect:
         serializedVersion: 2
-        x: 475
-        y: 5
-        width: 55
-        height: 50
+        x: 500
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eb65659604c9d74bbdcd5abc18981d5
-      internalID: 547566605
+      spriteID: 39d4516f9b95a1442b44f34bd253a0dc
+      internalID: -1502025895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_6
+      name: torso_2_6
       rect:
         serializedVersion: 2
-        x: 545
-        y: 5
-        width: 55
-        height: 50
+        x: 590
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aecbc3abbbbf4b941ae6fa1d15e77a70
-      internalID: 1723189509
+      spriteID: 227b1e87e39f00d4882fa6b5a0965f97
+      internalID: -816493562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_7
+      name: torso_2_7
       rect:
         serializedVersion: 2
-        x: 620
-        y: 5
-        width: 55
-        height: 50
+        x: 680
+        y: 35
+        width: 75
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,20 +277,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4342dc52641989e469d8e2b1a04b43a0
-      internalID: -1243827210
+      spriteID: 3a9429e1aa950244e8ee2844d3e94eaa
+      internalID: 1731689062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_8
+      name: torso_2_8
       rect:
         serializedVersion: 2
-        x: 725
-        y: 5
-        width: 70
-        height: 50
+        x: 805
+        y: 40
+        width: 50
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,20 +298,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b94409f120f33bf4d9ef8f7d27f1ed0c
-      internalID: 762217510
+      spriteID: 0247f0c6f5845fd4eae6dda801186de9
+      internalID: -2117043799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_9
+      name: torso_2_9
       rect:
         serializedVersion: 2
-        x: 815
-        y: 5
-        width: 70
-        height: 50
+        x: 875
+        y: 40
+        width: 50
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,20 +319,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2abba04bfdc25bf4e85b599d76bade51
-      internalID: 532928516
+      spriteID: b0b8752b4524bdf479b5447f375e5448
+      internalID: 1579850651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_10
+      name: torso_2_10
       rect:
         serializedVersion: 2
-        x: 905
-        y: 5
-        width: 70
-        height: 50
+        x: 955
+        y: 40
+        width: 50
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,20 +340,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a0fb54dc20045846920d15918cf0bf9
-      internalID: -367183177
+      spriteID: 82d98f4e91e1c954cb55b6280e267a3f
+      internalID: 1668803597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Legs_2_2_500p_11
+      name: torso_2_11
       rect:
         serializedVersion: 2
-        x: 990
-        y: 5
-        width: 65
-        height: 50
+        x: 1025
+        y: 40
+        width: 50
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -361,8 +361,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65b5aa8898ca24b4e9780fd82ad4a36c
-      internalID: 63391827
+      spriteID: 5378f8f78d3f77541aca48112454224d
+      internalID: -193928154
       vertices: []
       indices: 
       edges: []
@@ -378,19 +378,38 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Legs_2_2_500p_4: 308399581
-      Legs_2_2_500p_0: 240624478
-      Legs_2_2_500p_7: -1243827210
-      Legs_2_2_500p_12: 2123433353
-      Legs_2_2_500p_11: 63391827
-      Legs_2_2_500p_8: 762217510
-      Legs_2_2_500p_9: 532928516
-      Legs_2_2_500p_2: 1440665658
-      Legs_2_2_500p_5: 547566605
-      Legs_2_2_500p_1: -1464158047
-      Legs_2_2_500p_10: -367183177
-      Legs_2_2_500p_3: -2073940864
-      Legs_2_2_500p_6: 1723189509
+      torso_2_18: 695712210
+      torso_2_28: -1628870625
+      torso_2_22: -218676525
+      torso_2_29: -89297629
+      torso_2_6: -816493562
+      torso_2_15: -648264584
+      torso_2_19: 1389498678
+      torso_2_11: -193928154
+      torso_2_27: 2004742562
+      torso_2_17: 901199330
+      torso_2_26: -176160860
+      torso_2_5: -1502025895
+      torso_2_3: -1036342844
+      torso_2_14: -436688392
+      torso_2_31: -982332844
+      torso_2_7: 1731689062
+      torso_2_16: 467356456
+      torso_2_10: 1668803597
+      torso_2_12: 1340403218
+      torso_2_25: 647960329
+      torso_2_9: 1579850651
+      torso_2_1: 950049987
+      torso_2_8: -2117043799
+      torso_2_23: 874470393
+      torso_2_0: -1363046888
+      torso_2_4: -326307482
+      torso_2_20: 1143225462
+      torso_2_21: 139314658
+      torso_2_30: 1880930129
+      torso_2_24: 1026197870
+      torso_2_2: 672235052
+      torso_2_13: 1955252204
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

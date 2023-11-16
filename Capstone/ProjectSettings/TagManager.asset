@@ -47,3 +47,12 @@ TagManager:
   - name: Background
     uniqueID: 2771091075
     locked: 0
+  - name: Player Legs Sprite
+    uniqueID: 1788840265
+    locked: 0
+  - name: Player Top Sprite
+    uniqueID: 3846860583
+    locked: 0
+  - name: Player Torso Sprite
+    uniqueID: 604785485
+    locked: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Appearance : MonoBehaviour
+public class PlayerLegs : MonoBehaviour
 {
     [SerializeField] private AnimationClip[] legsWalking;
     [SerializeField] private AnimationClip[] legsWalkingFront;
@@ -11,7 +11,6 @@ public class Appearance : MonoBehaviour
     [SerializeField] private AnimationClip[] legsIdle;
     [SerializeField] private AnimationClip[] legsIdleFront;
     [SerializeField] private AnimationClip[] legsIdleBack;
-
 
     public Animator anim;
     public AnimatorOverrideController animOverride;
