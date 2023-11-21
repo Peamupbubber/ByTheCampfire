@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
+        ClearResponseButtons();
     }
 
     private void Update()
