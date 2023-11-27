@@ -16,8 +16,11 @@ public class PlayerTop : MonoBehaviour
     public Animator anim;
     public AnimatorOverrideController animOverride;
 
+    private SpriteRenderer spriteRenderer;
+
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
         anim.runtimeAnimatorController = animOverride;
@@ -38,5 +41,20 @@ public class PlayerTop : MonoBehaviour
         animOverride["Walking"] = topWalking[i];
         animOverride["Walkingf"] = topWalkingFront[i];
         animOverride["Walkingb"] = topWalkingBack[i];
+    }
+
+    public void SetSpriteFlip(bool flip)
+    {
+        spriteRenderer.flipX = flip;
+    }
+
+    public void SetAnimWalking(bool walk)
+    {
+        anim.SetBool("Walking", walk);
+    }
+
+    public void SetAnimDirection(float dir)
+    {
+        anim.SetFloat("Direction", dir);
     }
 }

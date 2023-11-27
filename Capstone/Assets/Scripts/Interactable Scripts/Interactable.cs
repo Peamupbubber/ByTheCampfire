@@ -26,11 +26,13 @@ public abstract class Interactable : MonoBehaviour
 
     protected GameObject player;
     protected PlayerInfo playerInfo;
+    protected PlayerMovement playerMovement;
 
     private void Awake()
     {
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
+        playerMovement = player.GetComponent<PlayerMovement>();
 
         gameManager = FindObjectOfType<GameManager>();
 
@@ -65,6 +67,7 @@ public abstract class Interactable : MonoBehaviour
     protected void StartInteraction()
     {
         playerInfo.canMove = false;
+        playerMovement.Idle();
         dialogueBox.gameObject.SetActive(true);
     }
 
