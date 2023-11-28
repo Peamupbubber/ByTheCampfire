@@ -20,6 +20,7 @@ public class CharacterCreation : MonoBehaviour
     private PronounGen pronounGen;
 
     [SerializeField] GameObject playerPreview;
+    [SerializeField] GameObject previewColorHeader;
 
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
@@ -30,7 +31,7 @@ public class CharacterCreation : MonoBehaviour
         pronounGen = GetComponent<PronounGen>();
     }
 
-    // Enable the correct canvases
+    // Enable the correct canvases and objects
     void Start()
     {
         nameMenu.enabled = true;
@@ -40,6 +41,8 @@ public class CharacterCreation : MonoBehaviour
         startMenu.enabled = false;
 
         currentlyEnabledCanvas = nameMenu;
+        previewColorHeader.SetActive(false);
+        playerPreview.SetActive(false);
     }
 
     public void EnableNameMenu() {
@@ -73,6 +76,7 @@ public class CharacterCreation : MonoBehaviour
         bool err = MenuChanged(false, true);
         if (err) return;
 
+        previewColorHeader.SetActive(true);
         colorsMenu.enabled = true;
         currentlyEnabledCanvas = colorsMenu;
     }
@@ -100,6 +104,7 @@ public class CharacterCreation : MonoBehaviour
         //Things that always happen if menu changed successfully
         currentlyEnabledCanvas.enabled = false;
         playerPreview.gameObject.SetActive(enableSprite);
+        previewColorHeader.SetActive(false);
 
         return false;
     }

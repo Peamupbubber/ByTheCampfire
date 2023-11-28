@@ -123,6 +123,11 @@ public class PronounGen : MonoBehaviour
         while (pronounDisplays.Count > 0) {
             RemovePronounDisplay(0);
         }
+
+        subjInputField.text = "";
+        objInputField.text = "";
+        possInputField.text = "";
+        subjInputField.Select();
     }
 
     private void RemovePronounDisplay(int i) {

@@ -9,22 +9,26 @@ public class PlayerPreview : MonoBehaviour
 
     appearance_type currentlySelected = appearance_type.NONE;
 
-    public Image legsImage;
-    public Image topImage;
     public Image torsoImage;
+    public Image topImage;
+    public Image legsImage;
 
-    [SerializeField] private PlayerLegs playerLegs;
-    [SerializeField] private PlayerTop playerTop;
-    [SerializeField] private PlayerTorso playerTorso;
+    [SerializeField] private PlayerSprite playerTorso;
+    [SerializeField] private PlayerSprite playerTop;
+    [SerializeField] private PlayerSprite playerLegs;
 
-    [SerializeField] private Sprite[] legs;
-    [SerializeField] private Sprite[] tops;
+    [SerializeField] private Image torsoSelectedImage;
+    [SerializeField] private Image topSelectedImage;
+    [SerializeField] private Image legsSelectedImage;
+
     [SerializeField] private Sprite[] torsos;
+    [SerializeField] private Sprite[] tops;
+    [SerializeField] private Sprite[] legs;
 
     //Defaults to white so that it doesn't change the color of the original sprite
-    private Color legsColor = Color.white;
-    private Color topColor = Color.white;
     private Color torsoColor = Color.white;
+    private Color topColor = Color.white;
+    private Color legsColor = Color.white;
 
     //Note: Change first entry in list once a new set of sprites is available
 
@@ -32,12 +36,12 @@ public class PlayerPreview : MonoBehaviour
 
     //Note for presentation: purposfully not having a default sprite
 
-    public void SetLegs(int i) {
-        if (legsImage.enabled == false)
-            legsImage.enabled = true;
-        legsImage.sprite = legs[i];
-        SetLegsColor(legsColor);
-        playerLegs.SetLegAnimation(i);
+    public void SetTorso(int i) {
+        if (torsoImage.enabled == false)
+            torsoImage.enabled = true;
+        torsoImage.sprite = torsos[i];
+        SetTorsoColor(torsoColor);
+        playerTorso.SetAnimation(i);
     }
 
     public void SetTop(int i) {
@@ -45,28 +49,16 @@ public class PlayerPreview : MonoBehaviour
             topImage.enabled = true;
         topImage.sprite = tops[i];
         SetTopColor(topColor);
-        playerTop.SetTopAnimation(i);
+        playerTop.SetAnimation(i);
     }
 
-    public void SetTorso(int i) {
-        if (torsoImage.enabled == false)
-            torsoImage.enabled = true;
-        torsoImage.sprite = torsos[i];
-        SetTorsoColor(torsoColor);
-        playerTorso.SetTorsoAnimation(i);
-    }
-
-    public void SetLegsColor(Color newColor) {
-        legsImage.color = newColor;
-        legsColor = newColor;
-        playerLegs.SetColor(newColor);
-    }
-
-    public void SetTopColor(Color newColor)
+    public void SetLegs(int i)
     {
-        topImage.color = newColor;
-        topColor = newColor;
-        playerTop.SetColor(newColor);
+        if (legsImage.enabled == false)
+            legsImage.enabled = true;
+        legsImage.sprite = legs[i];
+        SetLegsColor(legsColor);
+        playerLegs.SetAnimation(i);
     }
 
     public void SetTorsoColor(Color newColor)
@@ -76,23 +68,57 @@ public class PlayerPreview : MonoBehaviour
         playerTorso.SetColor(newColor);
     }
 
+    public void SetTopColor(Color newColor)
+    {
+        topImage.color = newColor;
+        topColor = newColor;
+        playerTop.SetColor(newColor);
+    }
+
+    public void SetLegsColor(Color newColor) {
+        legsImage.color = newColor;
+        legsColor = newColor;
+        playerLegs.SetColor(newColor);
+    }
+
     public void SetColor(Color newColor) {
         switch (currentlySelected) {
-            case appearance_type.LEGS:
-                SetLegsColor(newColor);
+            case appearance_type.TORSO:
+                SetTorsoColor(newColor);
                 break;
 
             case appearance_type.TOP:
                 SetTopColor(newColor);
                 break;
 
-            case appearance_type.TORSO:
-                SetTorsoColor(newColor);
+            case appearance_type.LEGS:
+                SetLegsColor(newColor);
                 break;
         }
     }
 
+    //Called by clicking on the pieces of the sprites in the colors menu
     public void SetCurrentlySelected(int type) {
         currentlySelected = (appearance_type)type;
+        switch ((appearance_type)type) {
+            case appearance_type.TORSO:
+                torsoSelectedImage.enabled = true;
+                topSelectedImage.enabled = false;
+                legsSelectedImage.enabled = false;
+                break;
+            case appearance_type.TOP:
+                torsoSelectedImage.enabled = false;
+                topSelectedImage.enabled = true;
+                legsSelectedImage.enabled = false;
+                break;
+            case appearance_type.LEGS:
+                torsoSelectedImage.enabled = false;
+                topSelectedImage.enabled = false;
+                legsSelectedImage.enabled = true;
+                break;
+            default:
+                Debug.Log("This should never happen");
+                break;
+        }
     }
 }

@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTop : MonoBehaviour
+public class PlayerSprite : MonoBehaviour
 {
-    [SerializeField] private AnimationClip[] topWalking;
-    [SerializeField] private AnimationClip[] topWalkingFront;
-    [SerializeField] private AnimationClip[] topWalkingBack;
+    [SerializeField] private AnimationClip[] idle;
+    [SerializeField] private AnimationClip[] idleBack;
+    [SerializeField] private AnimationClip[] idleFront;
 
-    [SerializeField] private AnimationClip[] topIdle;
-    [SerializeField] private AnimationClip[] topIdleFront;
-    [SerializeField] private AnimationClip[] topIdleBack;
+    [SerializeField] private AnimationClip[] walking;
+    [SerializeField] private AnimationClip[] walkingBack;
+    [SerializeField] private AnimationClip[] walkingFront;
 
-
-    public Animator anim;
+    private Animator anim;
     public AnimatorOverrideController animOverride;
 
     private SpriteRenderer spriteRenderer;
@@ -31,16 +30,16 @@ public class PlayerTop : MonoBehaviour
         GetComponent<SpriteRenderer>().color = newColor;
     }
 
-    //Called by the button sprites in the appearance menu
-    public void SetTopAnimation(int i)
+    //Called by the player preview functions
+    public void SetAnimation(int i)
     {
-        animOverride["Idle"] = topIdle[i];
-        animOverride["Idlef"] = topIdleFront[i];
-        animOverride["Idleb"] = topIdleBack[i];
+        animOverride["Idle"] = idle[i];
+        animOverride["Idleb"] = idleBack[i];
+        animOverride["Idlef"] = idleFront[i];
 
-        animOverride["Walking"] = topWalking[i];
-        animOverride["Walkingf"] = topWalkingFront[i];
-        animOverride["Walkingb"] = topWalkingBack[i];
+        animOverride["Walking"] = walking[i];
+        animOverride["Walkingb"] = walkingBack[i];
+        animOverride["Walkingf"] = walkingFront[i];
     }
 
     public void SetSpriteFlip(bool flip)

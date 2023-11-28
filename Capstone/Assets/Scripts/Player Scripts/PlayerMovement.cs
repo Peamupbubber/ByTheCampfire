@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInfo playerInfo;
 
     //These 3 scripts could be changed to one script with 3 different objs
-    private PlayerLegs legs;
-    private PlayerTop top;
-    private PlayerTorso torso;
+    [SerializeField] private PlayerSprite torso;
+    [SerializeField] private PlayerSprite top;
+    [SerializeField] private PlayerSprite legs;
 
     [SerializeField] private float speed;
 
@@ -19,9 +19,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         playerInfo = GetComponent<PlayerInfo>();
-        legs = transform.GetComponentInChildren<PlayerLegs>();
-        top = transform.GetComponentInChildren<PlayerTop>();
-        torso = transform.GetComponentInChildren<PlayerTorso>();
     }
 
     void Update()
@@ -50,14 +47,14 @@ public class PlayerMovement : MonoBehaviour
             else
                 facingX = -1;
 
-            legs.SetAnimWalking(true);
-            legs.SetSpriteFlip(facingX == -1);
+            torso.SetAnimWalking(true);
+            torso.SetSpriteFlip(facingX == -1);
 
             top.SetAnimWalking(true);
             top.SetSpriteFlip(facingX == -1);
 
-            torso.SetAnimWalking(true);
-            torso.SetSpriteFlip(facingX == -1);
+            legs.SetAnimWalking(true);
+            legs.SetSpriteFlip(facingX == -1);
 
             facingY = 0;
         }
@@ -75,14 +72,14 @@ public class PlayerMovement : MonoBehaviour
         if (xDir != 0)
             facingY = 0;
 
-        legs.SetAnimDirection(facingY);
-        top.SetAnimDirection(facingY);
         torso.SetAnimDirection(facingY);
+        top.SetAnimDirection(facingY);
+        legs.SetAnimDirection(facingY);
     }
 
     public void Idle() {
-        legs.SetAnimWalking(false);
-        top.SetAnimWalking(false);
         torso.SetAnimWalking(false);
+        top.SetAnimWalking(false);
+        legs.SetAnimWalking(false);
     }
 }
