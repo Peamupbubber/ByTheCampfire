@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private GameObject menuManager; //Might not need
     private GameObject menu;
 
-    [SerializeField] private GameObject responseButtons;
+    public GameObject responseButtons;
     [SerializeField] private TMP_Text responseButtonText1;
     [SerializeField] private TMP_Text responseButtonText2;
     [SerializeField] private TMP_Text responseButtonText3;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
+        DontDestroyOnLoad(gameObject);
 
         dialogueBoxResponseLocation = dialogueBox.transform.localPosition;
         dialogueBoxCenterLocation = new Vector3(0f, dialogueBox.transform.localPosition.y, dialogueBox.transform.localPosition.z);
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
+        player.SetActive(false);
         ClearResponseButtons();
     }
 

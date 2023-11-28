@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,12 +36,8 @@ public abstract class Interactable : MonoBehaviour
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
         playerMovement = player.GetComponent<PlayerMovement>();
-        responseButtons = GameObject.Find("Response Buttons");
-    }
-
-    private void Start()
-    {
         gameManager = FindObjectOfType<GameManager>();
+        responseButtons = gameManager.responseButtons;
         dialogueBox = gameManager.dialogueBox;
     }
 

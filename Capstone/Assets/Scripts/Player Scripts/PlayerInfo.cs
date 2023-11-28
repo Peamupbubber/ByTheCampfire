@@ -31,11 +31,6 @@ public class PlayerInfo : MonoBehaviour
         playerNameInputField = GameObject.Find("PlayerNameInputField").GetComponent<TMP_InputField>();
     }
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void CreatePronounQueue() {
         //Remake the queue incase it's being called from MenuManager
         if (pronounsChanged) { 
