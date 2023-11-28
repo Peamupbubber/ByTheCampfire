@@ -27,7 +27,7 @@ public class PlayerSprite : MonoBehaviour
 
     public void SetColor(Color newColor)
     {
-        GetComponent<SpriteRenderer>().color = newColor;
+        spriteRenderer.color = newColor;
     }
 
     //Called by the player preview functions

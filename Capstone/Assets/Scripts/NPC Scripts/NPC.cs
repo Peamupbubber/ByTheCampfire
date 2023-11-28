@@ -2,19 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public abstract class NPC : Interactable
 {
     [HideInInspector] public GameManager.Response response = GameManager.Response.None;
-    [SerializeField] private GameObject responseButtons;
 
     protected bool altRoutineRunning = false;
 
-    private void Start()
+    private SpriteRenderer torso;
+    private SpriteRenderer top;
+    private SpriteRenderer legs;
+
+    private void OnEnable()
     {
-        responseButtons = GameObject.Find("Response Buttons");
+        torso = transform.Find("Torso").gameObject.GetComponent<SpriteRenderer>();
+        top = transform.Find("Top").gameObject.GetComponent<SpriteRenderer>();
+        legs = transform.Find("Legs").gameObject.GetComponent<SpriteRenderer>();
+
+        torso.color = Random.ColorHSV();
+        top.color = Random.ColorHSV();
+        legs.color = Random.ColorHSV();
     }
 
     /* Checks if the player has responded to a line of dialogue */

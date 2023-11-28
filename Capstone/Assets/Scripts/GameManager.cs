@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text responseButtonText3;
     [SerializeField] private TMP_Text responseButtonText4;
 
-    [SerializeField] private TMP_Text dialogueBox;
+    public TextMeshProUGUI dialogueBox;
     public Vector3 dialogueBoxResponseLocation;
     public Vector3 dialogueBoxCenterLocation;
 

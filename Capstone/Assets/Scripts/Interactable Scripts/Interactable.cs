@@ -20,6 +20,8 @@ public abstract class Interactable : MonoBehaviour
     protected GameManager gameManager;
     protected TextMeshProUGUI dialogueBox;
 
+    protected GameObject responseButtons;
+
     private bool justClicked = false;
     private bool playerInRange = false;
     private const float waitTimeAfterClick = 0.3f;
@@ -33,10 +35,13 @@ public abstract class Interactable : MonoBehaviour
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
         playerMovement = player.GetComponent<PlayerMovement>();
+        responseButtons = GameObject.Find("Response Buttons");
+    }
 
+    private void Start()
+    {
         gameManager = FindObjectOfType<GameManager>();
-
-        dialogueBox = GameObject.Find("DialogueBox").GetComponent<TextMeshProUGUI>();
+        dialogueBox = gameManager.dialogueBox;
     }
 
     /* Writes the output string to the dialogue box and handles recent click waiting*/

@@ -17,3 +17,7 @@ Hard code dialogue or create a way to read it in from files? Probably hard code 
  7. Disable DB
 
 Abstract what's in Shopkeeper out to NPC and the abstract some of that out to Interactable
+
+Each NPC needs a legs, top, torso, and hair
+NPC script can have a reference to the 3 (4)
+On Start, get a random color and set each piece
