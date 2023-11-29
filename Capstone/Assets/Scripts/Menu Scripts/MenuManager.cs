@@ -50,6 +50,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void Settings() {
+        Debug.Log("Not implemented");
+    }
+
+    public void ExitGame() {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     //This will need to change when hair is added. Also could maybe be more modular somehow
     public bool HasCompleteSprite()
     {

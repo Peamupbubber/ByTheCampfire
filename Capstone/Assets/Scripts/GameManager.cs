@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         playerInfo = player.GetComponent<PlayerInfo>();
         player.SetActive(false);
         ClearResponseButtons();
+        menu.SetActive(false);
     }
 
     private void Update()
