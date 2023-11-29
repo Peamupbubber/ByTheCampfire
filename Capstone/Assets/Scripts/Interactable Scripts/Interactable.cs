@@ -31,7 +31,7 @@ public abstract class Interactable : MonoBehaviour
     protected PlayerInfo playerInfo;
     protected PlayerMovement playerMovement;
 
-    private void Awake()
+    protected void Awake()
     {
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();

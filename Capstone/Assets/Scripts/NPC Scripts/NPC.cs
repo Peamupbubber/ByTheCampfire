@@ -14,8 +14,10 @@ public abstract class NPC : Interactable
     private SpriteRenderer top;
     private SpriteRenderer legs;
 
-    private void OnEnable()
+    private new void Awake()
     {
+        base.Awake();
+        
         torso = transform.Find("Torso").gameObject.GetComponent<SpriteRenderer>();
         top = transform.Find("Top").gameObject.GetComponent<SpriteRenderer>();
         legs = transform.Find("Legs").gameObject.GetComponent<SpriteRenderer>();

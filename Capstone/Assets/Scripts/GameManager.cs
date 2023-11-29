@@ -5,8 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private GameObject menuManager; //Might not need
-    private GameObject menu;
+    [SerializeField] private GameObject menu;
 
     public GameObject responseButtons;
     [SerializeField] private TMP_Text responseButtonText1;
@@ -25,6 +24,11 @@ public class GameManager : MonoBehaviour
 
     public enum Response { R1, R2, R3, R4, None }
 
+    private void Awake()
+    {
+        menu.SetActive(true);
+    }
+
     private void Start()
     {
         Application.targetFrameRate = 60;
@@ -33,13 +37,14 @@ public class GameManager : MonoBehaviour
         dialogueBoxResponseLocation = dialogueBox.transform.localPosition;
         dialogueBoxCenterLocation = new Vector3(0f, dialogueBox.transform.localPosition.y, dialogueBox.transform.localPosition.z);
 
-        menuManager = GameObject.Find("Menu Manager");
-        menu = menuManager.transform.Find("Menu").gameObject;
-
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerInfo>();
         player.SetActive(false);
         ClearResponseButtons();
+    }
+
+    private void OnEnable()
+    {
         menu.SetActive(false);
     }
 

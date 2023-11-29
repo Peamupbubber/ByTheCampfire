@@ -14,6 +14,8 @@ public class CharacterCreation : MonoBehaviour
 
     private Canvas currentlyEnabledCanvas;
 
+    [SerializeField] private TMP_InputField playerNameInputField;
+
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
 
@@ -109,4 +111,8 @@ public class CharacterCreation : MonoBehaviour
         return false;
     }
 
+    //Called by on value changed in player name input field
+    public void UpdatePlayerName() {
+        playerInfo.UpdatePlayerName(playerNameInputField.text);
+    }
 }

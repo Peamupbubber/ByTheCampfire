@@ -9,7 +9,6 @@ public class PlayerInfo : MonoBehaviour
     public enum pronoun_type { SUBJECT, OBJECT, POSSESSIVE};
 
     private Random rng = new Random();
-    private TMP_InputField playerNameInputField;
 
     [HideInInspector] public List<string[]> pronouns;
 
@@ -28,7 +27,6 @@ public class PlayerInfo : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         pronounQueue = new List<int>();
-        playerNameInputField = GameObject.Find("PlayerNameInputField").GetComponent<TMP_InputField>();
     }
 
     public void CreatePronounQueue() {
@@ -71,9 +69,9 @@ public class PlayerInfo : MonoBehaviour
         pronouns = new List<string[]>();
     }
 
-    public void UpdatePlayerName() {
-        playerName = playerNameInputField.text;
-        if(playerName.Length > 0) playerName = playerName.ToUpper()[0] + playerName.Substring(1);
+    public void UpdatePlayerName(string name) {
+        if(name.Length > 0) name = name.ToUpper()[0] + name.Substring(1);
+        playerName = name;
     }
 
     public string GetAPronoun(pronoun_type type, bool cap) {
