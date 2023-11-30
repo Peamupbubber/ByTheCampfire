@@ -20,7 +20,6 @@ public class Shopkeeper : NPC
         gameManager.SetResponseButtonText2("What do you have for sale?");
         gameManager.SetResponseButtonText3("Nothing for now, thanks.");
 
-        /* Wait for a response from the player */
         while (!PlayerResponded()) { yield return null; }
 
         switch (response)

@@ -8,6 +8,8 @@ using SysRandom = System.Random;
 
 [RequireComponent(typeof(PronounProcessor))]
 
+/* the npcName field should be set in the inspector for each NPC */
+
 public abstract class NPC : Interactable, Character
 {
     [HideInInspector] public Response response = Response.None;
@@ -24,7 +26,7 @@ public abstract class NPC : Interactable, Character
 
     [HideInInspector] public PronounProcessor pronounProcessor;
 
-    private new void Awake()
+    protected new void Awake()
     {
         base.Awake();
         
@@ -40,12 +42,10 @@ public abstract class NPC : Interactable, Character
     }
 
     //Make sure to copy from Awake above if Interactable ever gets a Start()
-    private void Start()
+    protected void Start()
     {
         response = Response.None;
         pronouns = gameManager.GetNPCPronounSet();
-
-        npcName = "Temp Name";
         //Debug.Log(GetPronoun(PlayerInfo.pronoun_type.SUBJECT, true)); //rm
     }
 

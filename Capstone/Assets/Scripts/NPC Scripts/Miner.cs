@@ -32,11 +32,11 @@ public class Miner : NPC
                 break;
 
             case Response.R3:
-                NewDialogueOutput("The name's Bob.");
+                NewDialogueOutput("The name's " + npcName + ".");
 
                 ClearResponse();
 
-                gameManager.SetResponseButtonText1("Bob, I don't believe we've met.");
+                gameManager.SetResponseButtonText1(npcName + ", I don't believe we've met.");
                 gameManager.SetResponseButtonText2("Nice to meet you, I'm " + playerInfo.playerName + ".");
 
                 while (!PlayerResponded()) { yield return null; }

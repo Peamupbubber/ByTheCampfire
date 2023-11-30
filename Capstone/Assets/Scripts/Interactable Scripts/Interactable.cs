@@ -11,7 +11,6 @@ public abstract class Interactable : MonoBehaviour
     /* All interactables must implement a way to handle their current interaction */
     protected abstract void HandleCurrentInteraction();
 
-
     /* For cursor stuff when I get there */
     private Texture2D cursorTexture;
     private CursorMode cursorMode = CursorMode.Auto;
