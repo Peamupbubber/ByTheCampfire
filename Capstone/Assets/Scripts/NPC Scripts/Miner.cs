@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
 public class Miner : NPC
 {
@@ -16,21 +17,21 @@ public class Miner : NPC
         while (!PlayerResponded()) { yield return null; }
 
         switch (response) {
-            case GameManager.Response.R1:
+            case Response.R1:
                 NewDialogueOutput("Agreed.");
 
                 while (!DialogueSkipped()) { yield return null; }
 
                 break;
 
-            case GameManager.Response.R2:
+            case Response.R2:
                 NewDialogueOutput("Oh well aren't you cool.");
 
                 while (!DialogueSkipped()) { yield return null; }
 
                 break;
 
-            case GameManager.Response.R3:
+            case Response.R3:
                 NewDialogueOutput("The name's Bob.");
 
                 ClearResponse();
@@ -41,11 +42,11 @@ public class Miner : NPC
                 while (!PlayerResponded()) { yield return null; }
 
                 switch (response) {
-                    case GameManager.Response.R1:
+                    case Response.R1:
                         NewDialogueOutput("I suppose not, but I remember you from the ship." +
                             "I only saw you passing in the halls, but I thought to myself," +
-                            "\"" + playerInfo.GetAPronoun(PlayerInfo.pronoun_type.SUBJECT, false) + " looks like " +
-                            playerInfo.GetAPronounAndPTV(PlayerInfo.pronoun_type.SUBJECT, false) + " going to be quite the character\".");
+                            "\"" + playerInfo.pronounProcessor.GetAPronounPlusFollowingVerb(pronoun_type.SUBJECT, false, "look") + " like " +
+                            playerInfo.pronounProcessor.GetAPronounAndToBeVerb(pronoun_type.SUBJECT, false) + " going to be quite the character\".");
 
                         ClearResponse();
 
@@ -63,7 +64,7 @@ public class Miner : NPC
 
                         break;
 
-                    case GameManager.Response.R2:
+                    case Response.R2:
 
                         NewDialogueOutput(playerInfo.playerName + ", huh? Well, good to meet you. I’ll be around if you ever need anything.");
 
@@ -75,7 +76,7 @@ public class Miner : NPC
                         while (!PlayerResponded()) { yield return null; }
 
                         switch (response) {
-                            case GameManager.Response.R1:
+                            case Response.R1:
                                 NewDialogueOutput("Well, I lead the mining efforts here so if you need some resources or info on the mines I’m your guy.");
 
                                 while (!DialogueSkipped()) { yield return null; }

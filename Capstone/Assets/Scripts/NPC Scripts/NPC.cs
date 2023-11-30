@@ -2,17 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 using Random = UnityEngine.Random;
+using SysRandom = System.Random;
 
-public abstract class NPC : Interactable
+[RequireComponent(typeof(PronounProcessor))]
+
+public abstract class NPC : Interactable, Character
 {
-    [HideInInspector] public GameManager.Response response = GameManager.Response.None;
+    [HideInInspector] public Response response = Response.None;
 
     protected bool altRoutineRunning = false;
 
     private SpriteRenderer torso;
     private SpriteRenderer top;
     private SpriteRenderer legs;
+
+    public string npcName;
+    private List<string[]> pronouns;
+    private SysRandom rng = new SysRandom();
+
+    [HideInInspector] public PronounProcessor pronounProcessor;
 
     private new void Awake()
     {
@@ -25,20 +35,32 @@ public abstract class NPC : Interactable
         torso.color = Random.ColorHSV();
         top.color = Random.ColorHSV();
         legs.color = Random.ColorHSV();
+
+        pronounProcessor = GetComponent<PronounProcessor>();
+    }
+
+    //Make sure to copy from Awake above if Interactable ever gets a Start()
+    private void Start()
+    {
+        response = Response.None;
+        pronouns = gameManager.GetNPCPronounSet();
+
+        npcName = "Temp Name";
+        //Debug.Log(GetPronoun(PlayerInfo.pronoun_type.SUBJECT, true)); //rm
     }
 
     /* Checks if the player has responded to a line of dialogue */
     protected bool PlayerResponded()
     {
-        return response != GameManager.Response.None;
+        return response != Response.None;
     }
 
-    public void SetResponse(GameManager.Response newResponse) {
+    public void SetResponse(Response newResponse) {
         response = newResponse;
     }
 
     public void ClearResponse() {
-        response = GameManager.Response.None;
+        response = Response.None;
     }
 
     protected void StartInteractionWithResponse()
@@ -55,4 +77,23 @@ public abstract class NPC : Interactable
         EndInteraction();
     }
 
+    //For debugging
+    private void PrintProns()
+    {
+        for (int i = 0; i < pronouns.Count; i++)
+        {
+            Debug.Log(pronouns[i][0] + ", " + pronouns[i][1] + ", " + pronouns[i][2]);
+        }
+    }
+
+    public string GetPronoun(pronoun_type type, bool cap) {
+        string pronoun = npcName;
+        if (pronouns.Count > 0)
+        {
+            pronoun = pronouns[rng.Next(pronouns.Count)][(int)type];
+            if (cap) pronoun = pronoun.ToUpper()[0] + pronoun.Substring(1);
+        }
+
+        return pronoun;
+    }
 }

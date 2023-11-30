@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using TMPro;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,14 +21,19 @@ public class GameManager : MonoBehaviour
 
     public NPC currentInteractionsNPC;
 
+    private List<string[]> npcPronounOptions;
+    private Random rng = new Random();
+
     private GameObject player;
     private PlayerInfo playerInfo;
 
     public enum Response { R1, R2, R3, R4, None }
+    public enum pronoun_type { SUBJECT, OBJECT, POSSESSIVE };
 
     private void Awake()
     {
         menu.SetActive(true);
+        InitializeNPCPronounOptions();
     }
 
     private void Start()
@@ -54,6 +61,40 @@ public class GameManager : MonoBehaviour
             menu.SetActive(!menu.activeSelf);
             playerInfo.PausePressed();
         }
+    }
+
+    private void InitializeNPCPronounOptions() {
+        npcPronounOptions = new List<string[]>();
+
+        string path = "Assets/Text Files/npc_pronoun_options.txt";
+
+        StreamReader reader = new StreamReader(path);
+
+        string nextLine = reader.ReadLine();
+        while (nextLine != null)
+        {
+            npcPronounOptions.Add(nextLine.Split(" "));
+            nextLine = reader.ReadLine();
+        }
+
+        reader.Close();
+    }
+
+    //Generates a random set of pronouns for an NPC. Tends to get around 3 option but can be more or less. Assigns a random weight up to 10 for each one
+    //Always adds it once when it's chosen, assigns it up to 9 more times
+    public List<string[]> GetNPCPronounSet() {
+        List<string[]> set = new List<string[]>();
+
+        for (int i = 0; i < npcPronounOptions.Count; i++) {
+            if (rng.Next(npcPronounOptions.Count + 2) / npcPronounOptions.Count == 1) {
+                set.Add(npcPronounOptions[i]);
+                for (int j = 0; j < rng.Next(9); j++) {
+                    set.Add(npcPronounOptions[i]);
+                }
+            }
+        }
+
+        return set;
     }
 
     public void SetResponseButtonText1(string text)

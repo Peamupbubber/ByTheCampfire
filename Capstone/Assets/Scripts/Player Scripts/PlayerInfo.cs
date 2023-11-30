@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static GameManager;
 using Random = System.Random;
 
-public class PlayerInfo : MonoBehaviour
-{
-    public enum pronoun_type { SUBJECT, OBJECT, POSSESSIVE};
+[RequireComponent(typeof(PronounProcessor))]
 
+public class PlayerInfo : MonoBehaviour, Character
+{
     private Random rng = new Random();
 
     [HideInInspector] public List<string[]> pronouns;
@@ -23,10 +24,13 @@ public class PlayerInfo : MonoBehaviour
     [HideInInspector] public bool canMove = true;
     [HideInInspector] public bool paused = true;
 
+    [HideInInspector] public PronounProcessor pronounProcessor;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         pronounQueue = new List<int>();
+        pronounProcessor = GetComponent<PronounProcessor>();
     }
 
     public void CreatePronounQueue() {
@@ -74,7 +78,7 @@ public class PlayerInfo : MonoBehaviour
         playerName = name;
     }
 
-    public string GetAPronoun(pronoun_type type, bool cap) {
+    public string GetPronoun(pronoun_type type, bool cap) {
         string pronoun = playerName;
         if (numPronouns > 0) {
             pronoun = pronouns[GetPronounIndex()][(int)type];
@@ -84,22 +88,45 @@ public class PlayerInfo : MonoBehaviour
         return pronoun;
     }
 
-    //Returns a pronoun followed by a present tense verb ('is' or 'are' depending on the pronoun)
-    public string GetAPronounAndPTV(pronoun_type type, bool cap) {
-        string pronoun = GetAPronoun(type, cap);
-        string ptv = pronoun.Equals("they") ? "are" : "is";
+    /* Functions to assist grammatical accuracy, this may not always work with neopronouns that do not follow traditional english grammar
 
-        return pronoun + " " + ptv;
+    //Returns a pronoun followed by a present tense verb ('is' or 'are' depending on the pronoun)
+    public string GetAPronounAndToBeVerb(pronoun_type type, bool cap) {
+        string pronoun = GetPronoun(type, cap);
+        string v = pronoun.Equals("they") ? "are" : "is";
+
+        return pronoun + " " + v;
+    }
+
+    public string GetAPronounAndToHaveVerb(pronoun_type type, bool cap)
+    {
+        string pronoun = GetPronoun(type, cap);
+        string v = pronoun.Equals("they") ? "have" : "has";
+
+        return pronoun + " " + v;
+    }
+
+    //If the pronoun is 'they', the following verb does not include an 's', otherwise it does
+    //e.g. They own X, He owns X
+    //Usage: func(SUBJECT, false, "own") --> they own | he owns | ...
+    public string GetAPronounPlusFollowingVerb(pronoun_type type, bool cap, string folowing)
+    {
+        string pronoun = GetPronoun(type, cap);
+        string s = pronoun.Equals("they") ? "" : "s";
+
+        return pronoun + " " + folowing + s;
     }
 
     public string GetAPossessivePronounWithS() {
-        string pronoun = GetAPronoun(pronoun_type.POSSESSIVE, false);
+        string pronoun = GetPronoun(pronoun_type.POSSESSIVE, false);
 
         if (pronoun[pronoun.Length - 1] != 's')
             pronoun += 's';
 
         return pronoun;
     }
+
+    **************************************************************************************************************************************/
 
     private int GetPronounIndex()
     {

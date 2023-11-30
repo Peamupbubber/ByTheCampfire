@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
 public class Advisor : NPC
 {
@@ -21,20 +22,20 @@ public class Advisor : NPC
         while(!PlayerResponded()) { yield return null; }
 
         switch (response) {
-            case GameManager.Response.R1:
+            case Response.R1:
                 NewDialogueOutput("Great! Let's get going then, I'll meet you out in the woods shortly.");
 
                 break;
 
-            case GameManager.Response.R2:
+            case Response.R2:
                 NewDialogueOutput("Oh, you must've forgotten. I asked you to accompany me to gather some things for our camp, are you still up for that?");
 
                 StartCoroutine(FirstInteractionO1());
 
                 break;
 
-            case GameManager.Response.R3:
-                NewDialogueOutput("Oh, you don't remember me? I suppose we did only meet briefly the other day. I'm " + name +
+            case Response.R3:
+                NewDialogueOutput("Oh, you don't remember me? I suppose we did only meet briefly the other day. I'm " + npcName +
                     ", I'll be showing you around camp as you get settled in and getting you started on your first few tasks here." +
                     "If you're ever looking for something do or have any questions just come to me!");
 
@@ -58,7 +59,7 @@ public class Advisor : NPC
 
         //Play animation of leader walking over
 
-        NewDialogueOutput("Hey" /* + leader's name */ + ", this is " + playerInfo.playerName + "! " + playerInfo.GetAPronoun(PlayerInfo.pronoun_type.SUBJECT, true) + 
+        NewDialogueOutput("Hey" /* + leader's name */ + ", this is " + playerInfo.playerName + "! " + playerInfo.GetPronoun(pronoun_type.SUBJECT, true) + 
             " will be joining me today on a hunt for some raw materials.");
 
         while (!DialogueSkipped()) { yield return null; }
@@ -70,15 +71,12 @@ public class Advisor : NPC
 
         //Play animation of leader turning to advisor
 
-        //string subjPronoun = playerInfo.GetAPronoun(PlayerInfo.pronoun_type.SUBJECT, false);
-        //string follow = subjPronoun.Equals("they") ? "are" : "is";
-
-        NewDialogueOutput("Are you sure " + playerInfo.GetAPronounAndPTV(PlayerInfo.pronoun_type.SUBJECT, false) + " the right fit for this position?");
+        NewDialogueOutput("Are you sure " + playerInfo.pronounProcessor.GetAPronounAndToBeVerb(pronoun_type.SUBJECT, false) + " the right fit for this position?");
 
         while (!DialogueSkipped()) { yield return null; }
 
         /* Advisor */
-        NewDialogueOutput("Well of course, I wouldn't have chosen " + playerInfo.GetAPronoun(PlayerInfo.pronoun_type.OBJECT, false) + " otherwise!");
+        NewDialogueOutput("Well of course, I wouldn't have chosen " + playerInfo.GetPronoun(pronoun_type.OBJECT, false) + " otherwise!");
 
         while (!DialogueSkipped()) { yield return null; }
 
@@ -113,11 +111,11 @@ public class Advisor : NPC
         while(!PlayerResponded()) { yield return null; }
 
         switch (response) {
-            case GameManager.Response.R1:
+            case Response.R1:
                 NewDialogueOutput("Great! I'll meet you out there once you're ready");
                 break;
 
-            case GameManager.Response.R2:
+            case Response.R2:
                 NewDialogueOutput("Okay, well I'll meet you out there once you're ready.");
                 break;
         }

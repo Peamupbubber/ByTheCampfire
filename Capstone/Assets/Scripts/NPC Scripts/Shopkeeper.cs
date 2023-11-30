@@ -2,27 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static GameManager;
 
 public class Shopkeeper : NPC
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void HandleCurrentInteraction()
     {
-        response = GameManager.Response.None;
+        StartCoroutine(FirstInteraction());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    // This is how interactions between the player and an NPC will be represented
     private IEnumerator FirstInteraction()
     {
         StartInteractionWithResponse();
 
-        NewDialogueOutput("You’re " + playerInfo.playerName + " right? Nice to meet you! I’m Charlotte. I run the shop here. If you ever need any supplies or tools come right to me!");
+        NewDialogueOutput("You’re " + playerInfo.playerName + " right? Nice to meet you! I’m "+ npcName + ". I run the shop here. If you ever need any supplies or tools come right to me!");
         gameManager.SetResponseButtonText1("Nice to meet you!");
         gameManager.SetResponseButtonText2("What do you have for sale?");
         gameManager.SetResponseButtonText3("Nothing for now, thanks.");
@@ -32,19 +25,19 @@ public class Shopkeeper : NPC
 
         switch (response)
         {
-            case GameManager.Response.R1:
+            case Response.R1:
                 NewDialogueOutput("Good to meet you too! You know, ...");
 
                 break;
 
-            case GameManager.Response.R2:
+            case Response.R2:
                 NewDialogueOutput("Just a few things I’ve collected in our short time here");
 
                 //Show shop!
 
                 break;
 
-            case GameManager.Response.R3:
+            case Response.R3:
                 NewDialogueOutput("Hope to see you again!");
 
                 break;
@@ -55,9 +48,5 @@ public class Shopkeeper : NPC
         ClearResponse();
 
         EndInteractionWithResponse();
-    }
-
-    protected override void HandleCurrentInteraction() {
-        StartCoroutine(FirstInteraction());
     }
 }
