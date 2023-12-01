@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !playerInfo.paused && dialogueBox.text == "") {
+            Debug.Log("Pause Pressed");
             menu.SetActive(!menu.activeSelf);
             playerInfo.PausePressed();
         }

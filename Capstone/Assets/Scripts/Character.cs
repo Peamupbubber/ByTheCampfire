@@ -8,6 +8,6 @@ using static GameManager;
 
 public interface Character
 {
-    //Should be implemented such a random pronoun is returned or the character's name if the character has no pronouns associated
+    //Should be implemented such that a random pronoun is returned or the character's name if the character has no pronouns associated
     public string GetPronoun(pronoun_type type, bool cap);
 }
