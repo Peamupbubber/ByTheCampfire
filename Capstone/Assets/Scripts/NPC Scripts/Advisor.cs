@@ -7,7 +7,35 @@ public class Advisor : NPC
 {
     protected override void HandleCurrentInteraction()
     {
-        StartCoroutine(FirstInteraction());
+        //StartCoroutine(FirstInteraction());
+        StartCoroutine(DemoInteraction());
+    }
+
+    IEnumerator DemoInteraction() {
+        StartInteractionWithResponse();
+
+        NewDialogueOutput("Hello " + playerInfo.playerName + "! This a demo interation to showcase how the dialogue in this game works!");
+
+        gameManager.SetResponseButtonText1("Cool!");
+
+        while (!PlayerResponded()) { yield return null; }
+
+        ClearResponse();
+
+        NewDialogueOutput("I see you use " + playerInfo.GetPronoun(pronoun_type.SUBJECT, false) + "/" + playerInfo.GetPronoun(pronoun_type.OBJECT, false) + " pronouns!");
+
+        gameManager.SetResponseButtonText1("Yep!");
+
+        while (!PlayerResponded()) { yield return null; }
+
+        ClearResponse();
+
+        NewDialogueOutput("Awesome! I use " + GetPronoun(pronoun_type.SUBJECT, false) + "/" + GetPronoun(pronoun_type.OBJECT, false)
+            + "/" + GetPronoun(pronoun_type.POSSESSIVE, false) + " pronouns.");
+
+        while (!DialogueSkipped()) { yield return null; }
+
+        EndInteractionWithResponse();
     }
 
     IEnumerator FirstInteraction() {
@@ -71,7 +99,7 @@ public class Advisor : NPC
 
         //Play animation of leader turning to advisor
 
-        NewDialogueOutput("Are you sure " + playerInfo.pronounProcessor.GetAPronounAndToBeVerb(pronoun_type.SUBJECT, false) + " the right fit for this position?");
+        NewDialogueOutput("Are you sure " + playerInfo.pronounProcessor.GetASubjectAndToBeVerb(false) + " the right fit for this position?");
 
         while (!DialogueSkipped()) { yield return null; }
 

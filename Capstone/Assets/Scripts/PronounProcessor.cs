@@ -14,30 +14,30 @@ public class PronounProcessor : MonoBehaviour
 
     /* Functions to assist grammatical accuracy, this may not always work with neopronouns that do not follow traditional english grammar */
 
-    //Returns a pronoun followed by a present tense verb ('is' or 'are' depending on the pronoun)
-    public string GetAPronounAndToBeVerb(pronoun_type type, bool cap)
+    //'To be', 'to have', and other following verbs differ for subject pronoun 'they'
+    public string GetASubjectAndToBeVerb(bool cap)
     {
-        string pronoun = character.GetPronoun(type, cap);
-        string v = pronoun.Equals("they") ? "are" : "is";
+        string pronoun = character.GetPronoun(pronoun_type.SUBJECT, cap);
+        string v = pronoun.ToLower().Equals("they") ? "are" : "is";
 
         return pronoun + " " + v;
     }
 
-    public string GetAPronounAndToHaveVerb(pronoun_type type, bool cap)
+    public string GetASubjectAndToHaveVerb(bool cap)
     {
-        string pronoun = character.GetPronoun(type, cap);
-        string v = pronoun.Equals("they") ? "have" : "has";
+        string pronoun = character.GetPronoun(pronoun_type.SUBJECT, cap);
+        string v = pronoun.ToLower().Equals("they") ? "have" : "has";
 
         return pronoun + " " + v;
     }
 
     //If the pronoun is 'they', the following verb does not include an 's', otherwise it does
     //e.g. They own X, He owns X
-    //Usage: func(SUBJECT, false, "own") --> they own | he owns | ...
-    public string GetAPronounPlusFollowingVerb(pronoun_type type, bool cap, string folowing)
+    //Usage: func(false, "own") --> they own | he owns | ...
+    public string GetASubjectPlusFollowingVerb(bool cap, string folowing)
     {
-        string pronoun = character.GetPronoun(type, cap);
-        string s = pronoun.Equals("they") ? "" : "s";
+        string pronoun = character.GetPronoun(pronoun_type.SUBJECT, cap);
+        string s = pronoun.ToLower().Equals("they") ? "" : "s";
 
         return pronoun + " " + folowing + s;
     }

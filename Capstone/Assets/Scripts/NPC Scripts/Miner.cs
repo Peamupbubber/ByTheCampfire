@@ -45,8 +45,8 @@ public class Miner : NPC
                     case Response.R1:
                         NewDialogueOutput("I suppose not, but I remember you from the ship." +
                             "I only saw you passing in the halls, but I thought to myself," +
-                            "\"" + playerInfo.pronounProcessor.GetAPronounPlusFollowingVerb(pronoun_type.SUBJECT, false, "look") + " like " +
-                            playerInfo.pronounProcessor.GetAPronounAndToBeVerb(pronoun_type.SUBJECT, false) + " going to be quite the character\".");
+                            "\"" + playerInfo.pronounProcessor.GetASubjectPlusFollowingVerb(false, "look") + " like " +
+                            playerInfo.pronounProcessor.GetASubjectAndToBeVerb(false) + " going to be quite the character\".");
 
                         ClearResponse();
 

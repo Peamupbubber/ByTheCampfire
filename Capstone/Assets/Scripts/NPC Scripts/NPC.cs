@@ -47,6 +47,7 @@ public abstract class NPC : Interactable, Character
         response = Response.None;
         pronouns = gameManager.GetNPCPronounSet();
         //Debug.Log(GetPronoun(PlayerInfo.pronoun_type.SUBJECT, true)); //rm
+        //PrintProns();
     }
 
     /* Checks if the player has responded to a line of dialogue */
