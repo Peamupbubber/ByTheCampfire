@@ -64,10 +64,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     private void InitializeNPCPronounOptions() {
         npcPronounOptions = new List<string[]>();
 
-        string path = "Assets/Text Files/npc_pronoun_options.txt";
+        string path = Application.dataPath + "/StreamingAssets/npc_pronoun_options.txt";
 
         StreamReader reader = new StreamReader(path);
 
