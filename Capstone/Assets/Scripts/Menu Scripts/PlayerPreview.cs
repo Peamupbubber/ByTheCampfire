@@ -41,13 +41,25 @@ public class PlayerPreview : MonoBehaviour
 
     //Note for presentation: purposfully not having a default sprite
 
+    //The player can chose to have no hair for their character
     public void SetHair(int i)
     {
-        if (!hairImage.enabled)
-            hairImage.enabled = true;
-        hairImage.sprite = hairs[i];
-        SetHairColor(hairColor);
-        //playerHair.SetAnimation(i); uncomment when hair anims are a thing
+        if (i == 0)
+        {
+            hairImage.enabled = false;
+            hairSelectedImage.enabled = false;
+            hairImage.sprite = null;
+        }
+        else
+        { 
+            i--;
+            if (!hairImage.enabled)
+                hairImage.enabled = true;
+            hairImage.sprite = hairs[i];
+            SetHairColor(hairColor);
+            //playerHair.SetAnimation(i); uncomment when hair anims are a thing        
+        }
+
     }
 
     public void SetTorso(int i) {
@@ -122,7 +134,6 @@ public class PlayerPreview : MonoBehaviour
 
     //Called by clicking on the pieces of the sprites in the colors menu
     public void SetCurrentlySelected(int type) {
-        Debug.Log(type);
         currentlySelected = (appearance_type)type;
         switch ((appearance_type)type) {
             case appearance_type.HAIR:
