@@ -14,7 +14,7 @@ public class Advisor : NPC
     IEnumerator DemoInteraction() {
         StartInteractionWithResponse();
 
-        NewDialogueOutput("Hello " + playerInfo.playerName + "! This a demo interation to showcase how the dialogue in this game works!");
+        NewDialogueOutput("Hello " + playerInfo.playerName + "! This a demo interaction to showcase how the dialogue in this game works!");
 
         gameManager.SetResponseButtonText1("Cool!");
 
