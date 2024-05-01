@@ -35,7 +35,7 @@ public class NPCInfo : Character
     }
 
     //Generates a random set of pronouns for an NPC. Tends to get around 3 option but can be more or less. Assigns a random weight up to 10 for each one
-    //Always adds it once when it's chosen, assigns it up to 9 more times
+    //Always adds it once when it's chosen, assigns it up to 9 more times OR to the value of the multiplier if the player set their own
     public List<string[]> GetNPCPronounSet()
     {
         List<string[]> set = new List<string[]>();
@@ -45,7 +45,8 @@ public class NPCInfo : Character
             if (rng.Next(numPronouns + 2) / numPronouns == 1)
             {
                 set.Add(pronouns[i]);
-                for (int j = 0; j < rng.Next(9); j++)
+                int mult = multipliers[i] == 1 ? rng.Next(9) : multipliers[i];
+                for (int j = 0; j < mult; j++)
                 {
                     set.Add(pronouns[i]);
                 }
