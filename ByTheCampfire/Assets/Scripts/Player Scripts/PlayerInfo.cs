@@ -7,19 +7,13 @@ using Random = System.Random;
 
 [RequireComponent(typeof(PronounProcessor))]
 
-public class PlayerInfo : MonoBehaviour, Character
+public class PlayerInfo : Character, CharacterInterface
 {
     private Random rng = new Random();
 
-    [HideInInspector] public List<string[]> pronouns;
-
     /* [HideInInspector] */ public List<int> pronounQueue;
-    /* [HideInInspector] */ public List<int> multipliers;
 
-    public string playerName;
-    public int numPronouns;
-
-    public bool pronounsChanged = false;
+    public string playerName; //accessed by CharacterCreation script now
 
     [HideInInspector] public bool canMove = true;
     [HideInInspector] public bool paused = true;
@@ -31,6 +25,7 @@ public class PlayerInfo : MonoBehaviour, Character
         DontDestroyOnLoad(gameObject);
         pronounQueue = new List<int>();
         pronounProcessor = GetComponent<PronounProcessor>();
+        InitializeNewPronounLists();
     }
 
     public void CreatePronounQueue() {
@@ -59,18 +54,6 @@ public class PlayerInfo : MonoBehaviour, Character
             pronounQueue[k] = pronounQueue[n];
             pronounQueue[n] = v;
         }
-    }
-
-    public void PrintPronouns() {
-        for (int i = 0; i < numPronouns; i++) {
-            Debug.Log(pronouns[i][0] + ", " + pronouns[i][1] + ", " + pronouns[i][2]);
-        }
-    }
-
-    public void InitializeNewPronounLists() {
-        numPronouns = 0;
-        multipliers = new List<int>();
-        pronouns = new List<string[]>();
     }
 
     public void UpdatePlayerName(string name) {

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject settings;
 
     List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
 
@@ -20,7 +21,6 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
-        menu = transform.Find("Menu").gameObject;
     }
 
     private void Start()
@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Settings() {
-        Debug.Log("Not implemented");
+        settings.SetActive(true);
     }
 
     public void ExitGame() {

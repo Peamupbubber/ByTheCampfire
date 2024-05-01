@@ -10,7 +10,7 @@ using SysRandom = System.Random;
 
 /* the npcName field should be set in the inspector for each NPC */
 
-public abstract class NPC : Interactable, Character
+public abstract class NPC : Interactable, CharacterInterface
 {
     [HideInInspector] public Response response = Response.None;
 
@@ -21,8 +21,9 @@ public abstract class NPC : Interactable, Character
     private SpriteRenderer legs;
 
     public string npcName;
-    private List<string[]> pronouns;
-    private SysRandom rng = new SysRandom();
+    private readonly SysRandom rng = new();
+
+    [HideInInspector] public List<string[]> pronouns;
 
     [HideInInspector] public PronounProcessor pronounProcessor;
 
@@ -45,8 +46,8 @@ public abstract class NPC : Interactable, Character
     protected void Start()
     {
         response = Response.None;
-        pronouns = gameManager.GetNPCPronounSet();
-        //PrintProns();
+        pronouns = gameManager.npcInfo.GetNPCPronounSet();
+        //PrintPronouns();
     }
 
     /* Checks if the player has responded to a line of dialogue */
@@ -78,7 +79,7 @@ public abstract class NPC : Interactable, Character
     }
 
     //For debugging
-    private void PrintProns()
+    private void PrintPronouns()
     {
         for (int i = 0; i < pronouns.Count; i++)
         {

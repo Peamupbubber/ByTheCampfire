@@ -33,3 +33,8 @@ Change pronoun input to be 3 boxes
 
 Change buttons to both set the player anims AND create a preview of BUTTONS. That way
 you can select which one you want to change the color of, and it will also change the color of the actual sprites
+
+
+
+
+Player doesn't have an abstract, could change back to new Character abstract and have an NPCInfo script seperate from each NPC. Then that could just be on GM and get a set from there

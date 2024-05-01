@@ -5,11 +5,11 @@ using static GameManager;
 
 public class PronounProcessor : MonoBehaviour
 {
-    private Character character;
+    private CharacterInterface character;
 
     private void Start()
     {
-        character = GetComponent<Character>();
+        character = GetComponent<CharacterInterface>();
     }
 
     /* Functions to assist grammatical accuracy, this may not always work with neopronouns that do not follow traditional english grammar */

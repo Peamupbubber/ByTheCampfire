@@ -59,7 +59,8 @@ public class CharacterCreation : MonoBehaviour
         bool err = MenuChanged(false, false);
         if (err) return;
 
-        pronounGen.UpdateDisplayText();
+        //pronounGen.UpdateDisplayText();
+        pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
 
         pronounMenu.enabled = true;
         currentlyEnabledCanvas = pronounMenu;

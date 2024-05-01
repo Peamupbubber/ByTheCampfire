@@ -13,25 +13,12 @@ public class PronounGen : MonoBehaviour
     [SerializeField] private TMP_Text pronounDisplayText;
     [SerializeField] private TMP_Text errorDisplayText;
 
-    [SerializeField] private GameObject player;
-    private PlayerInfo playerInfo;
+    [SerializeField] private Character characterInfo;
 
     [SerializeField] private GameObject displayLayout;
     [SerializeField] private GameObject singlePronounbox;
 
-    [SerializeField] private List<GameObject> pronounDisplays;
-
-    private void Awake()
-    {
-        playerInfo = player.GetComponent<PlayerInfo>();
-        pronounDisplays = new List<GameObject>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        ClearPronouns();
-    }
+    [SerializeField] private List<GameObject> pronounDisplays = new List<GameObject>();
 
     private void Update()
     {
@@ -69,15 +56,15 @@ public class PronounGen : MonoBehaviour
             errorDisplayText.text = "All three pronoun types must be filled";
         }
         else {
-            playerInfo.pronouns.Add(pronouns);
+            characterInfo.pronouns.Add(pronouns);
 
             pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
-            pronounDisplays[playerInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toDisplay;
-            pronounDisplays[playerInfo.numPronouns].GetComponentInChildren<Button>().onClick.AddListener(RemovePronoun);
-            pronounDisplays[playerInfo.numPronouns].GetComponentInChildren<PronounDisplay>().playerInfo = playerInfo;
+            pronounDisplays[characterInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toDisplay;
+            pronounDisplays[characterInfo.numPronouns].GetComponentInChildren<Button>().onClick.AddListener(RemovePronoun);
+            pronounDisplays[characterInfo.numPronouns].GetComponentInChildren<PronounDisplay>().characterInfo = characterInfo;
 
-            playerInfo.pronounsChanged = true;
-            playerInfo.numPronouns++;
+            characterInfo.pronounsChanged = true;
+            characterInfo.numPronouns++;
             errorDisplayText.text = "";
 
             subjInputField.text = "";
@@ -87,17 +74,32 @@ public class PronounGen : MonoBehaviour
         }
     }
 
+    //Used for initializing the NPC default pronouns
+    public void AddNewPronoun(string[] pronouns) {
+        string toDisplay = pronouns[0] + "/" + pronouns[1] + "/" + pronouns[2];
+
+        characterInfo.pronouns.Add(pronouns);
+
+        pronounDisplays.Add(Instantiate(singlePronounbox, Vector3.zero, Quaternion.identity, displayLayout.gameObject.transform));
+        pronounDisplays[characterInfo.numPronouns].GetComponent<TextMeshProUGUI>().text = toDisplay;
+        pronounDisplays[characterInfo.numPronouns].GetComponentInChildren<Button>().onClick.AddListener(RemovePronoun);
+        pronounDisplays[characterInfo.numPronouns].GetComponentInChildren<PronounDisplay>().characterInfo = characterInfo;
+
+        characterInfo.pronounsChanged = true;
+        characterInfo.numPronouns++;
+    }
+
     public void RemovePronoun() {
-        for (int i = 0; i < playerInfo.numPronouns; i++) {
+        for (int i = 0; i < characterInfo.numPronouns; i++) {
             if (pronounDisplays[i].GetComponent<PronounDisplay>().removeClicked) {
                 string toRemove = pronounDisplays[i].GetComponent<TextMeshProUGUI>().text;
 
-                playerInfo.pronouns.RemoveAt(i);
+                characterInfo.pronouns.RemoveAt(i);
 
                 RemovePronounDisplay(i);
 
-                playerInfo.pronounsChanged = true;
-                playerInfo.numPronouns--;
+                characterInfo.pronounsChanged = true;
+                characterInfo.numPronouns--;
                 break;
             }
         }
@@ -117,8 +119,8 @@ public class PronounGen : MonoBehaviour
     } */
 
     public void ClearPronouns() {
-        playerInfo.InitializeNewPronounLists();
-        playerInfo.pronounsChanged = true;
+        characterInfo.InitializeNewPronounLists();
+        characterInfo.pronounsChanged = true;
 
         while (pronounDisplays.Count > 0) {
             RemovePronounDisplay(0);
@@ -136,15 +138,12 @@ public class PronounGen : MonoBehaviour
         Destroy(dispToRemove);
     }
 
-    public void UpdateDisplayText() {
-        pronounDisplayText.text = playerInfo.playerName + "'s pronouns:";
-    }
-
     //This might not be the best way, recreating the list every time
+    //Called by the Start Game button
     public void UpdateMultipliers() {
-        playerInfo.multipliers = new List<int>();
-        for (int i = 0; i < playerInfo.numPronouns; i++) {
-            playerInfo.multipliers.Add(pronounDisplays[i].GetComponent<PronounDisplay>().multiplier);
+        characterInfo.multipliers = new List<int>();
+        for (int i = 0; i < characterInfo.numPronouns; i++) {
+            characterInfo.multipliers.Add(pronounDisplays[i].GetComponent<PronounDisplay>().multiplier);
         }
     }
 }
