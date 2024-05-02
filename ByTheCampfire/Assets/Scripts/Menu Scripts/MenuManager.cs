@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject pause;
 
     List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
 
@@ -26,6 +27,29 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (settings.activeSelf)
+            {
+                settings.SetActive(false);
+                if(!SceneManager.GetActiveScene().name.Equals("Menu"))
+                    pause.SetActive(true);
+            }
+            else if (menu.activeSelf && !SceneManager.GetActiveScene().name.Equals("Menu"))
+            {
+                menu.SetActive(false);
+                pause.SetActive(true);
+            }
+            else if(GameManager.gameManager.CanPause())
+            {
+                pause.SetActive(!pause.activeSelf);
+                playerInfo.PausePressed();
+            }
+        }
     }
 
     public void StartGame()
@@ -50,7 +74,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void Resume() {
+        pause.SetActive(false);
+        playerInfo.PausePressed();
+    }
+
+    public void Creation() {
+        pause.SetActive(false);
+        menu.SetActive(true);
+    }
+
     public void Settings() {
+        pause.SetActive(false);
         settings.SetActive(true);
     }
 

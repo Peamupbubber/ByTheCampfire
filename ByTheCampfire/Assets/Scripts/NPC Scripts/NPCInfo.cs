@@ -14,6 +14,7 @@ public class NPCInfo : Character
         InitializeNPCPronounOptions();
     }
 
+    /* Takes a preset list of pronouns from a text file and initializes them into the NPC pronoun options, the player may choose to alter these in the settings */
     public void InitializeNPCPronounOptions()
     {
         string path = Application.dataPath + "/StreamingAssets/npc_pronoun_options.txt";
@@ -26,6 +27,7 @@ public class NPCInfo : Character
             //Add each default pronoun to the display (also adds the entry to the set of pronouns)
             pronounGen.AddNewPronoun(nextLine.Split(" "));
 
+            //Multiplier defaults to 1
             multipliers.Add(1);
 
             nextLine = reader.ReadLine();

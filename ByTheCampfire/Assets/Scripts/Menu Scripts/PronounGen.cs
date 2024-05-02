@@ -105,19 +105,6 @@ public class PronounGen : MonoBehaviour
         }
     }
 
-    /* Might come in useful if I want to require not adding the same one
-    //Pre-condition: split.Length = 3
-    private bool AlreadyContainsPronoun(string[] split)
-    {
-        for (int i = 0; i < playerInfo.numPronouns; i++)
-        {
-            if (playerInfo.pronouns[i][0] == split[0] && playerInfo.pronouns[i][1] == split[1] && playerInfo.pronouns[i][2] == split[2])
-                return true;
-        }
-
-        return false;
-    } */
-
     public void ClearPronouns() {
         characterInfo.InitializeNewPronounLists();
         characterInfo.pronounsChanged = true;

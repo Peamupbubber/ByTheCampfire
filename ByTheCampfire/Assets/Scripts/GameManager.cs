@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager gameManager;
-    public NPCInfo npcInfo;
+    [HideInInspector] public NPCInfo npcInfo;
 
     [SerializeField] private GameObject menu;
 
@@ -54,13 +55,8 @@ public class GameManager : MonoBehaviour
         menu.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerInfo.paused && dialogueBox.text == "") {
-            Debug.Log("Pause Pressed");
-            menu.SetActive(!menu.activeSelf);
-            playerInfo.PausePressed();
-        }
+    public bool CanPause() {
+        return !SceneManager.GetActiveScene().name.Equals("Menu") && dialogueBox.text == "";
     }
 
     public void SetResponseButtonText1(string text)
