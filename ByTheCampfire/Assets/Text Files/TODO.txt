@@ -1,0 +1,7 @@
+Add other TestSpriteChange pieces and test linking into appearance menu.
+
+Change name / apprearance / color? to one menu
+
+make more menu sprites in Aseprite
+
+decide on default sprite or not
